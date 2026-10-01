@@ -32,6 +32,18 @@ services:
     
     ports:
       - "8085:8080"
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: self-posted-frontend
+    restart: unless-stopped
+
+    depends_on:
+      - backend
+    
+    ports:
+      - "4200:4200"
 
 volumes:
   postgres_data:
