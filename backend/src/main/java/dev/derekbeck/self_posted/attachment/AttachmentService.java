@@ -18,7 +18,7 @@ public class AttachmentService {
     }
 
     public Attachment getAttachmentById(Long id) {
-        return attachmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Attachment not found with id: " + id)
+        return attachmentRepository.findById(id).orElseThrow(() -> new AttachmentNotFoundException(id)
         );
     }
 
