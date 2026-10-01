@@ -21,6 +21,9 @@ services:
     container_name: self-posted-backend
     restart: unless-stopped
 
+    volumes:
+    - ./uploads:/app/uploads
+
     depends_on:
       - postgres
 
