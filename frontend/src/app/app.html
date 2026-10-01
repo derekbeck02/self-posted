@@ -3,7 +3,7 @@
 <button (click)="loadPosts()">Load Posts</button>
 
 @if (posts().length === 0) {
-  <p>Not posts loaded</p>
+  <p>No posts loaded</p>
 } @else {
   @for (post of posts(); track post.postId) {
     <article>
