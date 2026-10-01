@@ -1,6 +1,12 @@
 <h1>Self-Posted</h1>
 
-<button (click)="loadPosts()">Load Posts</button>
+<textarea 
+  placeholder="Write your post..." 
+  [value]="newPostContent()"
+  (input)="newPostContent.set($any($event.target).value)">
+</textarea>
+
+<button (click)="createPost()">Post</button>
 
 @if (posts().length === 0) {
   <p>No posts loaded</p>

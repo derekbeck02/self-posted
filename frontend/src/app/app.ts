@@ -15,6 +15,7 @@ export class App implements OnInit {
 
   protected readonly title = signal('frontend');
   protected posts = signal<Post[]>([]);
+  protected newPostContent = signal('');
 
   ngOnInit() {
     this.loadPosts();
@@ -23,6 +24,19 @@ export class App implements OnInit {
   loadPosts() {
     this.postService.getPosts().subscribe(posts => {
       this.posts.set(posts);
+    });
+  }
+
+  createPost() {
+    const content = this.newPostContent().trim();
+    
+    if (!content) {
+      return;
+    }
+
+    this.postService.createPost(content).subscribe(() => {
+      this.newPostContent.set('');
+      this.loadPosts();
     });
   }
 }
