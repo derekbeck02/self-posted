@@ -39,4 +39,10 @@ export class App implements OnInit {
       this.loadPosts();
     });
   }
+
+  deletePost(postId: number) {
+    this.postService.deletePost(postId).subscribe(() => {
+      this.loadPosts();
+    });
+  }
 }
