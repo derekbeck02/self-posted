@@ -45,4 +45,23 @@ export class App implements OnInit {
       this.loadPosts();
     });
   }
+
+  editPost(post: Post) {
+    const updatedContent = prompt('Edit your post:', post.content);
+
+    if (updatedContent === null) {
+      return;
+  }
+
+  const content = updatedContent.trim();
+
+  if (!content) {
+    return;
+  }
+
+  this.postService.updatePost(post.postId, content).subscribe(() => {
+    this.loadPosts();
+    });
+  }
+
 }
