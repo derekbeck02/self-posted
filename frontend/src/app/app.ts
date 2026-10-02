@@ -35,7 +35,16 @@ export class App implements OnInit {
       return;
     }
 
-    this.postService.createPost(content).subscribe(() => {
+    this.postService.createPost(content).subscribe(post => {
+      if (this.selectedFile) {
+        this.postService.uploadAttachment(post.postId, this.selectedFile).subscribe(() => {
+          this.selectedFile = null;
+          this.newPostContent.set('');
+          this.loadPosts();
+        });
+      return;
+      }
+
       this.newPostContent.set('');
       this.loadPosts();
     });

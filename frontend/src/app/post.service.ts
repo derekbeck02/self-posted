@@ -23,4 +23,14 @@ export class PostService {
     updatePost(postId: number, content: string): Observable<Post> {
         return this.http.put<Post>(`${this.apiUrl}/${postId}`, { content });
     }
+
+    uploadAttachment(postId: number, file: File): Observable<unknown> {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return this.http.post(
+            `/api/attachments/post/${postId}`,
+            formData
+        );
+    }
 }
