@@ -59,8 +59,16 @@ public class Attachment {
         return storedFilename;
     }
 
+    public void setStoredFilename(String storedFilename) {
+        this.storedFilename = storedFilename;
+    }
+
     public String getMimeType() {
         return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 
     public Long getFileSize() {
