@@ -16,6 +16,7 @@ export class App implements OnInit {
   protected readonly title = signal('frontend');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
+  selectedFile: File | null = null;
 
   ngOnInit() {
     this.loadPosts();
@@ -64,4 +65,12 @@ export class App implements OnInit {
     });
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      console.log('Selected file:', this.selectedFile);
+    }
+  }
 }
