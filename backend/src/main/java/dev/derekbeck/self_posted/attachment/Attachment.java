@@ -2,6 +2,8 @@ package dev.derekbeck.self_posted.attachment;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.derekbeck.self_posted.post.Post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,7 @@ public class Attachment {
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
+    @JsonIgnore 
     private Post post;
 
     public Attachment() {

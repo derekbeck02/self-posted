@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.derekbeck.self_posted.attachment.Attachment;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,7 +33,7 @@ public class Post {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-
+    @JsonIgnore
     private List<Attachment> attachments = new ArrayList<>();
 
     private LocalDateTime createdAt;
