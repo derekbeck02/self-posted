@@ -16,6 +16,13 @@
     <article>
       <p>{{ post.content  }}</p>
       <small>{{ post.createdAt }}</small>
+      @if (post.attachments.length > 0) {
+        @for (attachment of post.attachments; track attachment.attachmentId) {
+          <p>
+            Attachment: {{  attachment.originalFilename  }}
+          </p>
+        }
+      }
 
       <button (click)="editPost(post)">Edit</button>
       <button (click)="deletePost(post.postId)">Delete</button>
