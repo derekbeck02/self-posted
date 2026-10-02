@@ -9,10 +9,6 @@
 <button (click)="createPost()">Post</button>
 <input type="file" (change)="onFileSelected($event)" />
 
-@if (selectedFile) {
-  <p>Selected file: {{ selectedFile.name }}</p>
-}
-
 @if (posts().length === 0) {
   <p>No posts loaded</p>
 } @else {
