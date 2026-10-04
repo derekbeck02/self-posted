@@ -61,16 +61,16 @@ export class App implements OnInit {
 
     if (updatedContent === null) {
       return;
-  }
+    }
 
-  const content = updatedContent.trim();
+    const content = updatedContent.trim();
 
-  if (!content) {
-    return;
-  }
+    if (!content) {
+      return;
+    }
 
-  this.postService.updatePost(post.postId, content).subscribe(() => {
-    this.loadPosts();
+    this.postService.updatePost(post.postId, content).subscribe(() => {
+      this.loadPosts();
     });
   }
 

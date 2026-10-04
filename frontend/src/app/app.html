@@ -17,10 +17,9 @@
       <p>{{ post.content  }}</p>
       <small>{{ post.createdAt }}</small>
       @if (post.attachments.length > 0) {
+        <p> Attachments:</p>
         @for (attachment of post.attachments; track attachment.attachmentId) {
-          <p>
-            Attachment: {{  attachment.originalFilename  }}
-          </p>
+          <a [href]="'/api/attachments/' + attachment.attachmentId + '/download'">{{  attachment.originalFilename  }}</a>
         }
       }
 
