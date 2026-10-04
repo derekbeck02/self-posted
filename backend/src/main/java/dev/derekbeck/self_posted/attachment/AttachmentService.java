@@ -1,12 +1,14 @@
 package dev.derekbeck.self_posted.attachment;
 
-import java.util.List;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,5 +62,11 @@ public class AttachmentService {
         attachment.setPost(post);
 
         return attachmentRepository.save(attachment);
+    }
+
+    public Resource loadAttachmentFile(Attachment attachment) throws IOException {
+        Path filePath = Paths.get(attachment.getFilePath());
+
+        return new UrlResource(filePath.toUri());
     }
 }
