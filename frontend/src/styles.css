@@ -3,9 +3,9 @@
 :root {
     --primary-color: #A970FF;
     --primary-hover-color: #D1A7FF;
-    --base-padding: 5px;
-    --base-margin: 10px;
-    --base-width: 300px;
+    --base-padding: 10px;
+    --base-margin: 20px;
+    --base-width: 90vw;
     --base-border-radius: 3px;
     --base-border-width: 1px;
     --base-text-color: white;
@@ -18,6 +18,8 @@ body {
     background-color: var(--base-background-color);
     color: var(--base-text-color);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: grid;
+    place-items: center;
 }
 
 button {

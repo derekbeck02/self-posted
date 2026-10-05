@@ -94,6 +94,10 @@ textarea {
     border-radius: var(--base-border-radius);
 }
 
+.attachment-item {
+    border: var(--base-border-width) solid gray;
+}
+
 .attachment-item small {
     display: block;
     opacity: 0.7;
