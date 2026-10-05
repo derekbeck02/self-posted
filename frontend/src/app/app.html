@@ -10,6 +10,14 @@
     <button class="primary-button" (click)="createPost()">Post</button>
     <input type="file" multiple (change)="onFileSelected($event)" />
   </div>
+  @if (uploadProgress() > 0) {
+    <progress
+      [value]="uploadProgress()"
+      max="100">
+    </progress>
+
+    <span>{{ uploadProgress() }}%</span>
+  }
 </div>
 
 @if (posts().length === 0) {

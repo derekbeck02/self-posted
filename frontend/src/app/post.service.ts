@@ -1,5 +1,5 @@
 import { Service, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post } from './post';
 
@@ -24,13 +24,17 @@ export class PostService {
         return this.http.put<Post>(`${this.apiUrl}/${postId}`, { content });
     }
 
-    uploadAttachment(postId: number, file: File): Observable<unknown> {
+    uploadAttachment(postId: number, file: File): Observable<HttpEvent<unknown>> {
         const formData = new FormData();
         formData.append('file', file);
 
         return this.http.post(
             `/api/attachments/post/${postId}`,
-            formData
+            formData,
+            {
+                observe: 'events',
+                reportProgress: true
+            }
         );
     }
 }
