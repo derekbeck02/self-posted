@@ -16,6 +16,7 @@ export class App implements OnInit {
   private postService = inject(PostService);
 
   protected uploadProgress = signal(0);
+  protected uploadError = signal('');
   protected readonly title = signal('frontend');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
@@ -40,6 +41,8 @@ export class App implements OnInit {
 
     this.postService.createPost(content).subscribe(post => {
       if (this.selectedFiles.length > 0) {
+        this.uploadError.set('');
+        this.uploadProgress.set(0);
         
         const totalBytes = this.selectedFiles.reduce(
           (total, file) => total + file.size,
@@ -66,11 +69,18 @@ export class App implements OnInit {
           )
         );
 
-        forkJoin(uploadRequests).subscribe(() => {
-          this.uploadProgress.set(100);
-          this.selectedFiles = [];
-          this.newPostContent.set('');
-          this.loadPosts();
+        forkJoin(uploadRequests).subscribe({
+          next: () => {
+            this.uploadProgress.set(100);
+            this.uploadError.set('');
+            this.selectedFiles = [];
+            this.newPostContent.set('');
+            this.loadPosts();
+          },
+          error: () => {
+            this.uploadError.set('Upload failed. Please try again.');
+            this.uploadProgress.set(0);
+          }
         });
 
         return;

@@ -57,3 +57,8 @@ textarea {
     align-items: center;
     gap: 5px;
 }
+
+.upload-error {
+    color: red;
+    margin-top: 5px;
+}

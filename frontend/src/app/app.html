@@ -18,6 +18,11 @@
 
     <span>{{ uploadProgress() }}%</span>
   }
+
+  @if (uploadError()) {
+    <p class="upload-error">{{  uploadError()  }}</p>
+  }
+  
 </div>
 
 @if (posts().length === 0) {
