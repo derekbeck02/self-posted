@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
@@ -13,6 +13,9 @@ import {  forkJoin, tap } from 'rxjs';
 })
 
 export class App implements OnInit {
+  @ViewChild('fileInput')
+  fileInput!: ElementRef<HTMLInputElement>;
+
   private postService = inject(PostService);
 
   protected uploadProgress = signal(0);
@@ -71,10 +74,15 @@ export class App implements OnInit {
 
         forkJoin(uploadRequests).subscribe({
           next: () => {
-            this.uploadProgress.set(100);
+            this.uploadProgress.set(0);
             this.uploadError.set('');
             this.selectedFiles = [];
             this.newPostContent.set('');
+            
+            if (this.fileInput) {
+              this.fileInput.nativeElement.value = '';
+            }
+
             this.loadPosts();
           },
           error: () => {

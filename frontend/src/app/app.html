@@ -8,7 +8,7 @@
   </textarea>
   <div id="main-user-input-buttons-container">
     <button class="primary-button" (click)="createPost()">Post</button>
-    <input type="file" multiple (change)="onFileSelected($event)" />
+    <input #fileInput type="file" multiple (change)="onFileSelected($event)" />
   </div>
   @if (uploadProgress() > 0) {
     <progress
@@ -22,7 +22,7 @@
   @if (uploadError()) {
     <p class="upload-error">{{  uploadError()  }}</p>
   }
-  
+
 </div>
 
 @if (posts().length === 0) {
