@@ -38,7 +38,7 @@ export class App implements OnInit {
   createPost() {
     const content = this.newPostContent().trim();
     
-    if (!content) {
+    if (!content && this.selectedFiles.length === 0) {
       return;
     }
 
@@ -114,7 +114,7 @@ export class App implements OnInit {
 
     const content = updatedContent.trim();
 
-    if (!content) {
+    if (!content && post.attachments.length === 0) {
       return;
     }
 

@@ -31,7 +31,9 @@
   @for (post of posts(); track post.postId) {
     <article>
       <small>{{ post.createdAt }}</small>
-      <p>{{ post.content }}</p>
+      @if (post.content) {
+        <p>{{ post.content }}</p>
+      } 
       <div class="post-buttons">
         <button (click)="editPost(post)">Edit</button>
         <button (click)="deletePost(post.postId)">Delete</button>
