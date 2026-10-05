@@ -1,0 +1,59 @@
+a {
+    color: #A970FF;
+}
+
+a:hover {
+    color: #D1A7FF;
+}
+
+article {
+    margin-bottom: var(--base-margin);
+    width: var(--base-width);
+    border: var(--base-border-width) solid gray;
+    padding: var(--base-padding);
+    border-radius: var(--base-border-radius);
+}
+
+article p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+article a {
+    display: block;
+}
+
+article small {
+    display: block;
+}
+
+textarea {
+    width: calc(var(--base-width) - 15px);
+    height: 50px;
+    resize: none;
+    padding: var(--base-padding);
+    color: var(--base-text-color);
+    background-color: var(--base-background-color);
+    border-radius: var(--base-border-radius);
+}
+
+#main-user-input-container {
+    width: var(--base-width);
+    display: block;
+    border: var(--base-border-width) solid gray;
+    padding: var(--base-padding);
+    border-radius: var(--base-border-radius);
+    margin-bottom: var(--base-margin);
+}
+
+#main-user-input-buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

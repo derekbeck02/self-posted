@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --primary-color: #A970FF;
+    --primary-hover-color: #D1A7FF;
+    --base-padding: 5px;
+    --base-margin: 10px;
+    --base-width: 300px;
+    --base-border-radius: 3px;
+    --base-border-width: 1px;
+    --base-text-color: white;
+    --base-background-color: #444444;   
+    --base-button-background-color: #5a5a5a;
+    --base-button-hover-color: #707070;
+}
+
+body {
+    background-color: var(--base-background-color);
+    color: var(--base-text-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button {
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: var(--base-border-radius);
+    background-color: var(--base-button-background-color);
+    color: var(--base-text-color);
+    cursor: pointer;
+}
+
+button:hover,
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--base-button-hover-color);
+}
+
+input[type="file"]::file-selector-button {
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: var(--base-border-radius);
+    background-color: var(--base-button-background-color);
+    color: var(--base-text-color);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.primary-button {
+    background-color: var(--primary-color);  
+}
+
+.primary-button:hover {
+    background-color: var(--primary-hover-color);
+}

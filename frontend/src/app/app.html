@@ -1,30 +1,37 @@
 <h1>Self-Posted</h1>
 
-<textarea 
+<div id="main-user-input-container">
+  <textarea 
   placeholder="Write your post..." 
   [value]="newPostContent()"
   (input)="newPostContent.set($any($event.target).value)">
-</textarea>
-
-<button (click)="createPost()">Post</button>
-<input type="file" (change)="onFileSelected($event)" />
+  </textarea>
+  <div id="main-user-input-buttons-container">
+    <button class="primary-button" (click)="createPost()">Post</button>
+    <input type="file" (change)="onFileSelected($event)" />
+  </div>
+</div>
 
 @if (posts().length === 0) {
   <p>No posts loaded</p>
 } @else {
   @for (post of posts(); track post.postId) {
     <article>
-      <p>{{ post.content  }}</p>
       <small>{{ post.createdAt }}</small>
+      <p>{{ post.content }}</p>
+      <div class="post-buttons">
+        <button (click)="editPost(post)">Edit</button>
+        <button (click)="deletePost(post.postId)">Delete</button>
+      </div>
+
       @if (post.attachments.length > 0) {
         <p> Attachments:</p>
         @for (attachment of post.attachments; track attachment.attachmentId) {
-          <a [href]="'/api/attachments/' + attachment.attachmentId + '/download'">{{  attachment.originalFilename  }}</a>
+          <a [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
+          {{  attachment.originalFilename  }}
+          </a>
         }
       }
-
-      <button (click)="editPost(post)">Edit</button>
-      <button (click)="deletePost(post.postId)">Delete</button>
     </article>
   }
 }
