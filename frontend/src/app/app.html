@@ -40,11 +40,26 @@
       </div>
 
       @if (post.attachments.length > 0) {
-        <p> Attachments:</p>
-        @for (attachment of post.attachments; track attachment.attachmentId) {
-          <a [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
-          {{  attachment.originalFilename  }}
-          </a>
+        <div class="attachments"></div>
+          <p> Attachments:</p>
+          @for (attachment of post.attachments; track attachment.attachmentId) {
+            <div class="attachment-item">
+              @if (attachment.mimeType.startsWith('image/')) {
+                <img
+                  class="attachment-preview"
+                  [src]="'/api/attachments/' + attachment.attachmentId + '/download'"
+                  [alt]="attachment.originalFilename" 
+                />
+              }
+
+              <a [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
+                {{ attachment.originalFilename }}
+              </a>
+
+              <small>
+                {{ attachment.mimeType }} • {{ formatBytes(attachment.fileSize) }} bytes
+              </small>
+            </div>
         }
       }
     </article>

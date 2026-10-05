@@ -75,6 +75,30 @@ textarea {
     gap: 5px;
 }
 
+.attachments {
+    margin-top: var(--base-margin);
+}
+
+.attchment-type {
+    margin-top: var(--base-margin);
+    padding: var(--base-padding);
+    border: var(--base-border-width) solid gray;
+    border: var(--base-border-radius);
+}
+
+.attachment-preview {
+    display: block;
+    max-width: var(--base-width);
+    max-height: 200px;
+    margin-bottom: var(--base-margin);
+    border-radius: var(--base-border-radius);
+}
+
+.attachment-item small {
+    display: block;
+    opacity: 0.7;
+}
+
 .post-buttons {
     display: flex;
     align-items: center;

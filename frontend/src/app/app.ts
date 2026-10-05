@@ -130,4 +130,43 @@ export class App implements OnInit {
       this.selectedFiles = Array.from(input.files);
     }
   }
+
+  formatBytes(bytes: number) {
+    if (bytes < (2 ** 10)) return `${bytes.toFixed(2)} B`;
+    else if ((bytes >= (2 ** 10)) && (bytes < (2 ** 20))) {
+      const kilobytes = bytes / (2 ** 10);
+      return `${kilobytes.toFixed(2)} KB`;
+    }
+    else if ((bytes >= (2 ** 20)) && (bytes < (2 ** 30))) {
+      const megabytes = bytes / (2 ** 20);
+      return `${megabytes.toFixed(2)} MB`;
+    }
+    else if ((bytes >= (2 ** 30)) && (bytes < (2 ** 40))) {
+      const gigabytes = bytes / (2 ** 30);
+      return `${gigabytes.toFixed(2)} GB`;
+    }
+    else if ((bytes >= (2 ** 40)) && (bytes < (2 ** 50))) {
+      const terabytes = bytes / (2 ** 40);
+      return `${terabytes.toFixed(2)} TB`;
+    }
+    else if ((bytes >= (2 ** 50)) && (bytes < (2 ** 60))) {
+      const petabytes = bytes / (2 ** 50);
+      return `${petabytes.toFixed(2)} PB`;
+    }
+    else if ((bytes >= (2 ** 60)) && (bytes < (2 ** 70))) {
+      const exabytes = bytes / (2 ** 60);
+      return `${exabytes.toFixed(2)} EB`;
+    }
+    else if ((bytes >= (2 ** 70)) && (bytes < (2 ** 80))) {
+      const zettabytes = bytes / (2 ** 70);
+      return `${zettabytes.toFixed(2)} ZB`;
+    }
+    else if ((bytes >= (2 ** 80)) && (bytes < (2 ** 90))) {
+      const yottabytes = bytes / (2 ** 80);
+      return `${yottabytes.toFixed(2)} YB`;
+    }
+    else {
+      return '0 B';
+    }
+  }
 }
