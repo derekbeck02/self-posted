@@ -8,7 +8,7 @@
   </textarea>
   <div id="main-user-input-buttons-container">
     <button class="primary-button" (click)="createPost()">Post</button>
-    <input type="file" (change)="onFileSelected($event)" />
+    <input type="file" multiple (change)="onFileSelected($event)" />
   </div>
 </div>
 

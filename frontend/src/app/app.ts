@@ -16,7 +16,7 @@ export class App implements OnInit {
   protected readonly title = signal('frontend');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
-  selectedFile: File | null = null;
+  selectedFiles: File[] = [];
 
   ngOnInit() {
     this.loadPosts();
@@ -36,12 +36,15 @@ export class App implements OnInit {
     }
 
     this.postService.createPost(content).subscribe(post => {
-      if (this.selectedFile) {
-        this.postService.uploadAttachment(post.postId, this.selectedFile).subscribe(() => {
-          this.selectedFile = null;
-          this.newPostContent.set('');
-          this.loadPosts();
-        });
+      if (this.selectedFiles.length > 0) {
+        for (const file of this.selectedFiles) {
+          this.postService.uploadAttachment(post.postId, file).subscribe()
+        }
+        
+        this.selectedFiles = [];
+        this.newPostContent.set('');
+        this.loadPosts();
+
       return;
       }
 
@@ -78,8 +81,7 @@ export class App implements OnInit {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      console.log('Selected file:', this.selectedFile);
+      this.selectedFiles = Array.from(input.files);
     }
   }
 }
