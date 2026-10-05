@@ -1,9 +1,9 @@
 a {
-    color: #A970FF;
+    color: var(--primary-color);
 }
 
 a:hover {
-    color: #D1A7FF;
+    color: var(--primary-hover);
 }
 
 article {
@@ -25,6 +25,29 @@ article a {
 
 article small {
     display: block;
+}
+
+progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 20px;
+    border: none;
+    background-color: var(--base-background-color);
+    border-radius: var(--base-border-radius);
+    padding-top: var(--base-padding);
+    padding-bottom: var(--base-padding);
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--primary-color);
+    border-radius: var(--base-border-radius);
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--primary-color);
+    border-radius: var(--base-border-radius);
 }
 
 textarea {
