@@ -18,7 +18,6 @@ export class App implements OnInit {
 
   protected uploadProgress = signal(0);
   protected uploadError = signal('');
-  protected readonly title = signal('frontend');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
   protected searchQuery = signal('');

@@ -72,8 +72,8 @@ textarea {
 }
 
 #new-post-input-area-container {
+    flex-shrink: 0;
     width: var(--base-width);
-    display: block;
     border: var(--base-border-width) solid gray;
     padding: var(--base-padding);
     border-radius: var(--base-border-radius);
@@ -100,11 +100,11 @@ textarea {
     margin-top: var(--base-margin);
 }
 
-.attchment-type {
+.attachment-type {
     margin-top: var(--base-margin);
     padding: var(--base-padding);
     border: var(--base-border-width) solid gray;
-    border: var(--base-border-radius);
+    border-radius: var(--base-border-radius);
 }
 
 .attachment-preview {
@@ -117,6 +117,9 @@ textarea {
 
 .attachment-item {
     border: var(--base-border-width) solid gray;
+    border-radius: var(--base-border-radius);
+    padding: var(--base-padding);
+    margin-top: var(--base-margin);
 }
 
 .attachment-item small {
