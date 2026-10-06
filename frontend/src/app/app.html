@@ -11,7 +11,7 @@
   />
 
   <!-- Posts Scrollable Window -->
-  <div id="posts-container">
+  <div id="posts-container" #postsContainer>
     @for (post of filteredPosts(); track post.postId) {
       <article>
         <small>{{ formatDate(post.createdAt) }}</small>
@@ -37,6 +37,7 @@
                     class="attachment-preview"
                     [src]="'/api/attachments/' + attachment.attachmentId + '/download'"
                     [alt]="attachment.originalFilename" 
+                    (load)="scrollToBottom()"
                   />
                 }
 

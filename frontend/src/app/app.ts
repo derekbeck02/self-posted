@@ -14,6 +14,9 @@ export class App implements OnInit {
   @ViewChild('fileInput')
   fileInput!: ElementRef<HTMLInputElement>;
 
+  @ViewChild('postsContainer')
+  postsContainer!: ElementRef<HTMLDivElement>;
+
   private postService = inject(PostService);
 
   protected uploadProgress = signal(0);
@@ -30,6 +33,7 @@ export class App implements OnInit {
   loadPosts() {
     this.postService.getPosts().subscribe(posts => {
       this.posts.set(posts);
+      this.scrollToBottom();
     });
   }
 
@@ -203,5 +207,14 @@ export class App implements OnInit {
     });
 
     return `${datePart} • ${timePart}`;
+  }
+
+  scrollToBottom() {
+    setTimeout(() => {
+      if (this.postsContainer) {
+        this.postsContainer.nativeElement.scrollTop =
+        this.postsContainer.nativeElement.scrollHeight;
+      }
+    })
   }
 }
