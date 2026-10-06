@@ -22,6 +22,13 @@ body {
     place-items: center;
 }
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
 button {
     padding: 5px 10px;
     border: 1px solid gray;
