@@ -9,6 +9,8 @@ a:hover {
 article {
     margin-bottom: var(--base-margin);
     width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
     border: var(--base-border-width) solid gray;
     padding: var(--base-padding);
     border-radius: var(--base-border-radius);
@@ -21,6 +23,13 @@ article p {
 
 article a {
     display: block;
+}
+
+article p,
+article a,
+.attachment-item {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 article small {
@@ -67,8 +76,9 @@ textarea::placeholder {
 }
 
 #app-container {
-    height: 100vh;
+    height: 100dvh;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     padding: var(--base-padding);
     display: flex;
@@ -82,7 +92,6 @@ textarea::placeholder {
 
 #new-post-input-area-container {
     flex-shrink: 0;
-    width: calc(100% - 10px);
     box-sizing: border-box;
     border: var(--base-border-width) solid gray;
     padding: var(--base-padding);
@@ -99,8 +108,10 @@ textarea::placeholder {
 #posts-container {
     flex: 1;
     min-height: 0;
+    min-width: 0;
+    width: 100%;
     overflow-y: auto;
-    max-height: 80vh;
+    overflow-x: hidden;
 
     /* Firefox scrollbar */
     scrollbar-width: thin;
@@ -130,11 +141,16 @@ textarea::placeholder {
 
 #search-input {
     flex-shrink: 0;
-    width: calc(100% - 10px);
     box-sizing: border-box;
     color: var(--base-text-color);
     background-color: var(--base-card-color);
     border: var(--base-border-width) solid gray;
+}
+
+#search-input,
+#new-post-input-area-container {
+    width: 100%;
+    max-width: 100%;
 }
 
 .attachments {
@@ -150,8 +166,10 @@ textarea::placeholder {
 
 .attachment-preview {
     display: block;
-    max-width: var(--base-width);
+    max-width: 100%;
+    height: auto;
     max-height: 200px;
+    object-fit: contain;
     margin-bottom: var(--base-margin);
     border-radius: var(--base-border-radius);
 }
