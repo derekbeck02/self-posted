@@ -157,6 +157,7 @@ textarea {
     padding: var(--base-padding);
     margin-top: var(--base-margin);
     width: 100%;
+    background-color: var(--base-card-color);
 }
 
 .attachment-item small {

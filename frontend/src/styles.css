@@ -9,7 +9,8 @@
     --base-border-radius: 3px;
     --base-border-width: 1px;
     --base-text-color: white;
-    --base-background-color: #444444;   
+    --base-background-color: black;   
+    --base-card-color: #444444;
     --base-button-background-color: #5a5a5a;
     --base-button-hover-color: #707070;
 }
