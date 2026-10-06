@@ -1,6 +1,13 @@
 <h1>Self-Posted</h1>
 
 <div id="main-user-input-container">
+  <input 
+    type="text" 
+    placeholder="Search posts..." 
+    [value]="searchQuery()"
+    (input)="searchQuery.set($any($event.target).value)"
+  />
+
   <textarea 
   placeholder="Write your post..." 
   [value]="newPostContent()"
@@ -28,7 +35,7 @@
 @if (posts().length === 0) {
   <p>No posts loaded</p>
 } @else {
-  @for (post of posts(); track post.postId) {
+  @for (post of filteredPosts(); track post.postId) {
     <article>
       <small>{{ post.createdAt }}</small>
       @if (post.content) {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild, computed } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
@@ -23,6 +23,7 @@ export class App implements OnInit {
   protected readonly title = signal('frontend');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
+  protected searchQuery = signal('');
   selectedFiles: File[] = [];
 
   ngOnInit() {
@@ -130,6 +131,19 @@ export class App implements OnInit {
       this.selectedFiles = Array.from(input.files);
     }
   }
+
+  protected filteredPosts = computed(() => {
+    const query = this.searchQuery().trim().toLowerCase();
+
+    if (!query) {
+      return this.posts();
+    }
+    
+    return this.posts().filter(post => 
+      post.content.toLowerCase().includes(query) ||
+      post.attachments.some(attachment => 
+        attachment.originalFilename.toLowerCase().includes(query)));
+  });
 
   formatBytes(bytes: number) {
     if (bytes < (2 ** 10)) return `${bytes.toFixed(2)} B`;
