@@ -7,4 +7,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "start", "--", "--host", "0.0.0.0"]
+CMD ["npm", "start", "--", "--host", "0.0.0.0", "--live-reload=false", "--hmr=false"]
