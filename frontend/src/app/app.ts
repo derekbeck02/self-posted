@@ -187,4 +187,14 @@ export class App implements OnInit {
       return '0 B';
     }
   }
+
+  formatDate(date: string) {
+    return new Date(date).toLocaleString(undefined, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+  }
 }
