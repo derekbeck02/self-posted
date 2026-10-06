@@ -14,7 +14,7 @@
   <div id="posts-container">
     @for (post of filteredPosts(); track post.postId) {
       <article>
-        <small>{{ post.createdAt }}</small>
+        <small>{{ formatDate(post.createdAt) }}</small>
 
         @if (post.content) {
           <p>{{ post.content }}</p>

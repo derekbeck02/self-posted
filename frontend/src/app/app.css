@@ -25,6 +25,7 @@ article a {
 
 article small {
     display: block;
+    color: var(--muted-text-color);
 }
 
 progress {
@@ -59,6 +60,10 @@ textarea {
     background-color: var(--base-card-color);
     border-radius: var(--base-border-radius);
     box-sizing: border-box;
+}
+
+textarea::placeholder {
+    color: var(--muted-text-color);
 }
 
 #app-container {

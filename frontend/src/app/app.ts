@@ -189,12 +189,19 @@ export class App implements OnInit {
   }
 
   formatDate(date: string) {
-    return new Date(date).toLocaleString(undefined, {
+    const parsedDate = new Date(date);
+
+    const datePart = parsedDate.toLocaleDateString(undefined, {
       month: 'short',
       day: 'numeric',
-      year: 'numeric',
+      year: 'numeric'
+    });
+
+    const timePart = parsedDate.toLocaleTimeString(undefined, {
       hour: 'numeric',
       minute: '2-digit'
     });
+
+    return `${datePart} • ${timePart}`;
   }
 }

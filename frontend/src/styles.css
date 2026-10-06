@@ -3,6 +3,7 @@
 :root {
     --primary-color: #A970FF;
     --primary-hover-color: #D1A7FF;
+    --muted-text-color: #a0a0a0;
     --base-padding: 10px;
     --base-margin: 20px;
     --base-width: 90vw;
