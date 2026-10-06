@@ -8,7 +8,7 @@ a:hover {
 
 article {
     margin-bottom: var(--base-margin);
-    width: var(--base-width);
+    width: 100%;
     border: var(--base-border-width) solid gray;
     padding: var(--base-padding);
     border-radius: var(--base-border-radius);
@@ -120,6 +120,8 @@ textarea {
 
 #search-input {
     flex-shrink: 0;
+    width: calc(100% - 10px);
+    box-sizing: border-box;
 }
 
 .attachments {
@@ -146,6 +148,7 @@ textarea {
     border-radius: var(--base-border-radius);
     padding: var(--base-padding);
     margin-top: var(--base-margin);
+    width: 100%;
 }
 
 .attachment-item small {
@@ -162,4 +165,11 @@ textarea {
 .upload-error {
     color: red;
     margin-top: 5px;
+}
+
+article,
+.attachment-item,
+textarea,
+#search-input {
+    box-sizing: border-box;
 }
