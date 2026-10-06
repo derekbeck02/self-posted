@@ -60,7 +60,18 @@ textarea {
     border-radius: var(--base-border-radius);
 }
 
-#main-user-input-container {
+#app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#app-container h1 {
+    flex-shrink: 0;
+}
+
+#new-post-input-area-container {
     width: var(--base-width);
     display: block;
     border: var(--base-border-width) solid gray;
@@ -69,10 +80,20 @@ textarea {
     margin-bottom: var(--base-margin);
 }
 
-#main-user-input-buttons-container {
+#new-post-input-area-buttons-container {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+#posts-container {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+#search-input {
+    flex-shrink: 0;
 }
 
 .attachments {

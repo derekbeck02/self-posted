@@ -1,12 +1,10 @@
 import { Component, ElementRef, inject, OnInit, signal, ViewChild, computed } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
 import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -135,14 +133,21 @@ export class App implements OnInit {
   protected filteredPosts = computed(() => {
     const query = this.searchQuery().trim().toLowerCase();
 
-    if (!query) {
-      return this.posts();
+    let posts = [...this.posts()].sort(
+      (a, b) => 
+        new Date(a.createdAt).getTime() - 
+        new Date(b.createdAt).getTime()
+    );
+
+    if (query) {
+      posts = posts.filter(post =>
+        post.content.toLowerCase().includes(query) ||
+        post.attachments.some(attachment =>
+          attachment.originalFilename.toLowerCase().includes(query)
+        )
+      );
     }
-    
-    return this.posts().filter(post => 
-      post.content.toLowerCase().includes(query) ||
-      post.attachments.some(attachment => 
-        attachment.originalFilename.toLowerCase().includes(query)));
+    return posts;
   });
 
   formatBytes(bytes: number) {
