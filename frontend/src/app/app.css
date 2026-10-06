@@ -91,6 +91,31 @@ textarea {
     min-height: 0;
     overflow-y: auto;
     max-height: 80vh;
+
+    /* Firefox scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+/* Chrome, Edge, and Safari scrollbar */
+#posts-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Chrome, Edge, and Safari scrollbar */
+#posts-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#posts-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--base-border-radius);
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+#posts-container::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover-color);
 }
 
 #search-input {
