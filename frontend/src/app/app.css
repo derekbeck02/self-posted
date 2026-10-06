@@ -56,7 +56,7 @@ textarea {
     resize: none;
     padding: var(--base-padding);
     color: var(--base-text-color);
-    background-color: var(--base-background-color);
+    background-color: var(--base-card-color);
     border-radius: var(--base-border-radius);
     box-sizing: border-box;
 }
@@ -128,7 +128,7 @@ textarea {
     width: calc(100% - 10px);
     box-sizing: border-box;
     color: var(--base-text-color);
-    background-color: var(--base-background-color);
+    background-color: var(--base-card-color);
     border: var(--base-border-width) solid gray;
 }
 
