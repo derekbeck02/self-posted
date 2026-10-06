@@ -127,6 +127,9 @@ textarea {
     flex-shrink: 0;
     width: calc(100% - 10px);
     box-sizing: border-box;
+    color: var(--base-text-color);
+    background-color: var(--base-background-color);
+    border: var(--base-border-width) solid gray;
 }
 
 .attachments {
