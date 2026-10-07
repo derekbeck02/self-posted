@@ -3,8 +3,10 @@ import { HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
 import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
+import { NormalAirplaneIconComponent } from './normal-airplane-icon/normal-airplane-icon';
 
 @Component({
+  imports: [NormalAirplaneIconComponent],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

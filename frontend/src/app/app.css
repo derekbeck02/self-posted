@@ -224,17 +224,6 @@ textarea::placeholder {
     opacity: 0.7;
 }
 
-.brand-mark {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: var(--base-background-color);
-    border-radius: var(--base-border-radius);
-    justify-content: center;
-}
-
 .post-buttons {
     display: flex;
     align-items: center;
