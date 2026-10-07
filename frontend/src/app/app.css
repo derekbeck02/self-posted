@@ -6,6 +6,24 @@ a:hover {
     color: var(--primary-hover-color);
 }
 
+#app-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--base-margin);
+}
+
+#app-header h1 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+#app-header small {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted-text-color);
+}
+
 article {
     width: 100%;
     max-width: 100%;
@@ -204,6 +222,17 @@ textarea::placeholder {
 .attachment-item small {
     display: block;
     opacity: 0.7;
+}
+
+.brand-mark {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--base-background-color);
+    border-radius: var(--base-border-radius);
+    justify-content: center;
 }
 
 .post-buttons {
