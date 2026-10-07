@@ -5,6 +5,8 @@ import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './damaged-airplane-icon/damaged-airplane-icon';
+import { PencilIcon } from './pencil-icon/pencil-icon';
+import { TrashCanIcon } from './trash-can-icon/trash-can-icon';
 
 @Component({
   imports: [
