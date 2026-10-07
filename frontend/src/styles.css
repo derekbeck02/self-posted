@@ -1,24 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --primary-color: #A970FF;
-    --primary-hover-color: #D1A7FF;
-    --muted-text-color: #a0a0a0;
-    --post-border-color: #2A2930;
-    --post-background-color: #1B1B21;
-    --attachment-border-color: #2A2930;
-    --attachment-background-color: #18181E;
+    /* Branding Palette */
+    --primary-dark: #7900D9;
+    --primary: #A970FF;
+    --primary-light: #D1A7FF;
+    
+    /* Neutral Palette */
+    --gray-darkest: #17171C;
+    --gray-darker: #18181E;
+    --gray-dark: #19191F;
+    --gray-dark-soft: #1B1B21;
+    --gray-medium-dark: #212026;
+    --gray-medium: #2A2930;
+    --gray: #5A5A5A;
+    --gray-light: #707070;
+    --gray-lighter: #A0A0A0;
+    --white: #FFFFFF;
+
+    /* Normal logo colors */
+    --logo-primary-dark: var(--primary-dark);
+    --logo-primary: var(--primary);
+    --logo-primary-light: var(--primary-light);
+    --logo-white: var(--white);
+
+    /* Damaged logo colors */
+    --logo-error-dark: var(--gray);
+    --logo-error-light: var(--gray-lighter);
+    --logo-error-white: var(--white);
+    
+    /* UI colors */
+    --primary-color: var(--primary);
+    --primary-hover-color: var(--primary-light);
+
+    --muted-text-color: var(--gray-lighter);
+
+    --base-background-color: var(--gray-darkest);
+    --base-card-color: var(--gray-dark);
+    --base-text-color: var(--white);
+
+    --base-border-color: var(--gray-medium-dark);
+
+    --post-background-color: var(--gray-dark-soft);
+    --post-border-color: var(--gray-medium);
+
+    --attachment-background-color: var(--gray-darker);
+    --attachment-border-color: var(--gray-medium);
+
+    --base-button-background-color: var(--gray);
+    --base-button-hover-color: var(--gray-light);
+
+    /* Layout */
     --base-padding: 10px;
     --base-margin: 20px;
     --base-width: 90vw;
-    --base-border-color: #212026;
     --base-border-radius: 3px;
     --base-border-width: 2px;
-    --base-text-color: white;
-    --base-background-color: #17171c;   
-    --base-card-color: #19191f;
-    --base-button-background-color: #5a5a5a;
-    --base-button-hover-color: #707070;
 }
 
 *,
