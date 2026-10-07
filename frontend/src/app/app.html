@@ -11,51 +11,56 @@
   />
 
   <!-- Posts Scrollable Window -->
-  <div id="posts-container" #postsContainer>
-    @for (post of filteredPosts(); track post.postId) {
-      <article>
-        <small>{{ formatDate(post.createdAt) }}</small>
+  <div 
+    id="posts-container"
+    #postsContainer
+    (scroll)="onPostsScroll()"
+  >
+    <div #postsContent>
+      @for (post of filteredPosts(); track post.postId) {
+        <article>
+          <small>{{ formatDate(post.createdAt) }}</small>
 
-        @if (post.content) {
-          <p>{{ post.content }}</p>
-        } 
+          @if (post.content) {
+            <p>{{ post.content }}</p>
+          } 
 
-        <div class="post-buttons">
-          <button (click)="editPost(post)">Edit</button>
-          <button (click)="deletePost(post.postId)">Delete</button>
-        </div>
-
-        @if (post.attachments.length > 0) {
-          <div class="attachments">
-            <p> Attachments:</p>
-
-            @for (attachment of post.attachments; track attachment.attachmentId) {
-              <div class="attachment-item">
-
-                @if (attachment.mimeType.startsWith('image/')) {
-                  <img
-                    class="attachment-preview"
-                    [src]="'/api/attachments/' + attachment.attachmentId + '/download'"
-                    [alt]="attachment.originalFilename" 
-                    (load)="scrollToBottom()"
-                  />
-                }
-
-                <a 
-                  [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
-                  {{ attachment.originalFilename }}
-                </a>
-
-                <small>
-                  {{ attachment.mimeType }} • {{ formatBytes(attachment.fileSize) }}
-                </small>
-
-              </div>
-            }
+          <div class="post-buttons">
+            <button (click)="editPost(post)">Edit</button>
+            <button (click)="deletePost(post.postId)">Delete</button>
           </div>
-        }
-      </article>
+
+          @if (post.attachments.length > 0) {
+            <div class="attachments">
+              <p> Attachments:</p>
+
+              @for (attachment of post.attachments; track attachment.attachmentId) {
+                <div class="attachment-item">
+
+                  @if (attachment.mimeType.startsWith('image/')) {
+                    <img
+                      class="attachment-preview"
+                      [src]="'/api/attachments/' + attachment.attachmentId + '/download'"
+                      [alt]="attachment.originalFilename" 
+                    />
+                  }
+
+                  <a 
+                    [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
+                    {{ attachment.originalFilename }}
+                  </a>
+
+                  <small>
+                    {{ attachment.mimeType }} • {{ formatBytes(attachment.fileSize) }}
+                  </small>
+
+                </div>
+              }
+            </div>
+          }
+        </article>
     }
+    </div>
   </div>
 
   <!-- New Post Input Area -->

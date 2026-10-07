@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild, computed } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild, computed } from '@angular/core';
 import { HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
 import { Post } from './post';
@@ -10,14 +10,19 @@ import {  forkJoin, tap } from 'rxjs';
   templateUrl: './app.html',
 })
 
-export class App implements OnInit {
+export class App implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('fileInput')
   fileInput!: ElementRef<HTMLInputElement>;
 
   @ViewChild('postsContainer')
   postsContainer!: ElementRef<HTMLDivElement>;
 
+  @ViewChild('postsContent')
+  postsContent!: ElementRef<HTMLDivElement>;
+
   private postService = inject(PostService);
+  private resizeObserver?: ResizeObserver;
+  private stickToBottom = true;
 
   protected uploadProgress = signal(0);
   protected uploadError = signal('');
@@ -28,6 +33,20 @@ export class App implements OnInit {
 
   ngOnInit() {
     this.loadPosts();
+  }
+
+  ngAfterViewInit() {
+    this.resizeObserver = new ResizeObserver(() => {
+      if (this.stickToBottom) {
+        requestAnimationFrame(() => this.scrollToBottom());
+      }
+    });
+
+    this.resizeObserver.observe(this.postsContent.nativeElement);
+  }
+
+  ngOnDestroy() {
+    this.resizeObserver?.disconnect();
   }
 
   loadPosts() {
@@ -210,11 +229,15 @@ export class App implements OnInit {
   }
 
   scrollToBottom() {
-    setTimeout(() => {
-      if (this.postsContainer) {
-        this.postsContainer.nativeElement.scrollTop =
-        this.postsContainer.nativeElement.scrollHeight;
-      }
-    })
+    const container = this.postsContainer.nativeElement;
+    container.scrollTop = container.scrollHeight;
+  }
+
+  onPostsScroll() {
+    const container = this.postsContainer.nativeElement;
+
+    const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+
+    this.stickToBottom = distanceFromBottom < 50;
   }
 }
