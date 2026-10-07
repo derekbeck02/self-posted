@@ -167,6 +167,7 @@ textarea::placeholder {
 }
 
 #posts-content {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     gap: var(--base-margin);
@@ -222,6 +223,22 @@ textarea::placeholder {
 .attachment-item small {
     display: block;
     opacity: 0.7;
+}
+
+.empty-posts-message {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--muted-text-color);
+}
+
+.empty-posts-message app-damaged-airplane-icon {
+    width: 90px;
+    height: 60px;
+    margin-bottom: var(--base-margin);
 }
 
 .post-buttons {

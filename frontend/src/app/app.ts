@@ -4,9 +4,12 @@ import { PostService } from './post.service';
 import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './normal-airplane-icon/normal-airplane-icon';
+import { DamagedAirplaneIconComponent } from './damaged-airplane-icon/damaged-airplane-icon';
 
 @Component({
-  imports: [NormalAirplaneIconComponent],
+  imports: [
+    NormalAirplaneIconComponent, 
+    DamagedAirplaneIconComponent],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

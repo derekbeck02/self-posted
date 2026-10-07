@@ -25,7 +25,16 @@
     #postsContainer
     (scroll)="onPostsScroll()"
   >
-    <div #postsContent>
+    <div id="posts-content" #postsContent>
+      @if (filteredPosts().length === 0) {
+        <div class="empty-posts-message">
+          <app-damaged-airplane-icon></app-damaged-airplane-icon>
+
+          <p>There are no posts...</p>
+          <small>Create a post below or change your search query.</small>
+        </div>
+      }
+
       @for (post of filteredPosts(); track post.postId) {
         <article>
           <small>{{ formatDate(post.createdAt) }}</small>
