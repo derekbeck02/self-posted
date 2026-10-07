@@ -37,16 +37,35 @@
 
       @for (post of filteredPosts(); track post.postId) {
         <article>
-          <small>{{ formatDate(post.createdAt) }}</small>
+          <div class="post-header">
+            <small>{{ formatDate(post.createdAt) }}</small>
+
+            <div class="post-actions">
+              <button 
+                class="icon-button edit-button"
+                type="button"
+                title="Edit post"
+                aria-label="Edit post"
+                (click)="editPost(post)"
+              >
+                <app-pencil-icon></app-pencil-icon>
+              </button>
+
+              <button 
+                class="icon-button delete-button"
+                type="button"
+                title="Delete post"
+                aria-label="Delete post"
+                (click)="deletePost(post.postId)"
+              >
+                <app-trash-can-icon></app-trash-can-icon>
+              </button>
+            </div>
+          </div>
 
           @if (post.content) {
             <p>{{ post.content }}</p>
           } 
-
-          <div class="post-buttons">
-            <button (click)="editPost(post)">Edit</button>
-            <button (click)="deletePost(post.postId)">Delete</button>
-          </div>
 
           @if (post.attachments.length > 0) {
             <div class="attachments">

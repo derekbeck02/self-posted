@@ -10,8 +10,11 @@ import { TrashCanIcon } from './trash-can-icon/trash-can-icon';
 
 @Component({
   imports: [
-    NormalAirplaneIconComponent, 
-    DamagedAirplaneIconComponent],
+    NormalAirplaneIconComponent,
+    DamagedAirplaneIconComponent,
+    PencilIcon,
+    TrashCanIcon
+],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

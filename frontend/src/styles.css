@@ -17,6 +17,7 @@
     --gray-light: #707070;
     --gray-lighter: #A0A0A0;
     --white: #FFFFFF;
+    --red: #FF4D4D;
 
     /* Normal logo colors */
     --logo-primary-dark: var(--primary-dark);
@@ -33,6 +34,7 @@
     --primary-color: var(--primary);
     --primary-hover-color: var(--primary-light);
     --muted-text-color: var(--gray-lighter);
+    --negative-color: var(--red);
     --base-background-color: var(--gray-darkest);
     --base-card-color: var(--gray-dark);
     --base-text-color: var(--white);
