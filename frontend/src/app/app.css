@@ -7,13 +7,14 @@ a:hover {
 }
 
 article {
-    margin-bottom: var(--base-margin);
     width: 100%;
     max-width: 100%;
     overflow-wrap: anywhere;
-    border: var(--base-border-width) solid gray;
     padding: var(--base-padding);
+    background-color: var(--post-background-color);
     border-radius: var(--base-border-radius);
+    border: var(--base-border-width) solid var(--post-border-color);
+    margin-bottom: var(--base-margin);
 }
 
 article p {
@@ -35,6 +36,10 @@ article a,
 article small {
     display: block;
     color: var(--muted-text-color);
+}
+
+article:last-child {
+    margin-bottom: 0;
 }
 
 progress {
@@ -93,7 +98,7 @@ textarea::placeholder {
 #new-post-input-area-container {
     flex-shrink: 0;
     box-sizing: border-box;
-    border: var(--base-border-width) solid gray;
+    border: var(--base-border-width) solid var(--base-border-color);
     padding: var(--base-padding);
     border-radius: var(--base-border-radius);
     margin-bottom: var(--base-margin);
@@ -112,10 +117,14 @@ textarea::placeholder {
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: var(--base-padding);
+    border: var(--base-border-width) solid var(--base-border-color);
+    border-radius: var(--base-border-radius);
 
     /* Firefox scrollbar */
     scrollbar-width: thin;
     scrollbar-color: var(--primary-color) transparent;
+    scrollbar-gutter: stable;
 }
 
 /* Chrome, Edge, and Safari scrollbar */
@@ -131,7 +140,7 @@ textarea::placeholder {
 #posts-container::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: var(--base-border-radius);
-    border: 3px solid transparent;
+    border: var(--base-border-width) solid  var(--base-background-color);
     background-clip: content-box;
 }
 
@@ -139,12 +148,21 @@ textarea::placeholder {
     background: var(--primary-hover-color);
 }
 
+#posts-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-margin);
+}
+
 #search-input {
     flex-shrink: 0;
     box-sizing: border-box;
     color: var(--base-text-color);
     background-color: var(--base-card-color);
-    border: var(--base-border-width) solid gray;
+    border: var(--base-border-width) solid var(--base-border-color);
+    padding: var(--base-padding);
+    border-radius: var(--base-border-radius);
+    margin-bottom: var(--base-margin);
 }
 
 #search-input,
@@ -160,7 +178,7 @@ textarea::placeholder {
 .attachment-type {
     margin-top: var(--base-margin);
     padding: var(--base-padding);
-    border: var(--base-border-width) solid gray;
+    border: var(--base-border-width) solid var(--base-border-color);
     border-radius: var(--base-border-radius);
 }
 
@@ -175,12 +193,12 @@ textarea::placeholder {
 }
 
 .attachment-item {
-    border: var(--base-border-width) solid gray;
+    border: var(--base-border-width) solid var(--attachment-border-color);
     border-radius: var(--base-border-radius);
     padding: var(--base-padding);
     margin-top: var(--base-margin);
     width: 100%;
-    background-color: var(--base-card-color);
+    background-color: var(--attachment-background-color);
 }
 
 .attachment-item small {

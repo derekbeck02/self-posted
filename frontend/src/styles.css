@@ -4,11 +4,16 @@
     --primary-color: #A970FF;
     --primary-hover-color: #D1A7FF;
     --muted-text-color: #a0a0a0;
+    --post-border-color: #2A2930;
+    --post-background-color: #1B1B21;
+    --attachment-border-color: #2A2930;
+    --attachment-background-color: #18181E;
     --base-padding: 10px;
     --base-margin: 20px;
     --base-width: 90vw;
+    --base-border-color: #212026;
     --base-border-radius: 3px;
-    --base-border-width: 1px;
+    --base-border-width: 2px;
     --base-text-color: white;
     --base-background-color: #17171c;   
     --base-card-color: #19191f;
@@ -45,7 +50,7 @@ body {
 
 button {
     padding: 5px 10px;
-    border: 1px solid gray;
+    border: var(--base-border-width) solid var(--base-border-color);
     border-radius: var(--base-border-radius);
     background-color: var(--base-button-background-color);
     color: var(--base-text-color);
@@ -59,7 +64,7 @@ input[type="file"]::file-selector-button:hover {
 
 input[type="file"]::file-selector-button {
     padding: 5px 10px;
-    border: 1px solid gray;
+    border: var(--base-border-width) solid var(--base-border-color);
     border-radius: var(--base-border-radius);
     background-color: var(--base-button-background-color);
     color: var(--base-text-color);
