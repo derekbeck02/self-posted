@@ -32,21 +32,15 @@
     /* UI colors */
     --primary-color: var(--primary);
     --primary-hover-color: var(--primary-light);
-
     --muted-text-color: var(--gray-lighter);
-
     --base-background-color: var(--gray-darkest);
     --base-card-color: var(--gray-dark);
     --base-text-color: var(--white);
-
     --base-border-color: var(--gray-medium-dark);
-
     --post-background-color: var(--gray-dark-soft);
     --post-border-color: var(--gray-medium);
-
     --attachment-background-color: var(--gray-darker);
     --attachment-border-color: var(--gray-medium);
-
     --base-button-background-color: var(--gray);
     --base-button-hover-color: var(--gray-light);
 
