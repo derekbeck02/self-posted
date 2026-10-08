@@ -80,6 +80,10 @@
                       [src]="'/api/attachments/' + attachment.attachmentId + '/download'"
                       [alt]="attachment.originalFilename" 
                     />
+                  } @else {
+                    <app-file-type-icon
+                      [filename]="attachment.originalFilename"
+                    ></app-file-type-icon>
                   }
 
                   <a 

@@ -3,21 +3,23 @@ import { HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
 import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
-import { NormalAirplaneIconComponent } from './normal-airplane-icon/normal-airplane-icon';
-import { DamagedAirplaneIconComponent } from './damaged-airplane-icon/damaged-airplane-icon';
-import { PencilIcon } from './pencil-icon/pencil-icon';
-import { TrashCanIcon } from './trash-can-icon/trash-can-icon';
+import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
+import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
+import { PencilIcon } from './icons/actions/pencil-icon/pencil-icon';
+import { TrashCanIcon } from './icons/actions/trash-can-icon/trash-can-icon';
+import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
 
 @Component({
+  selector: 'app-root',
+  styleUrl: './app.css',
+  templateUrl: './app.html',
   imports: [
     NormalAirplaneIconComponent,
     DamagedAirplaneIconComponent,
     PencilIcon,
-    TrashCanIcon
-],
-  selector: 'app-root',
-  styleUrl: './app.css',
-  templateUrl: './app.html',
+    TrashCanIcon,
+    FileTypeIcon
+  ],
 })
 
 export class App implements OnInit, AfterViewInit, OnDestroy {
