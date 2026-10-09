@@ -34,6 +34,8 @@ public class Attachment {
 
     private LocalDateTime createdAt;
 
+    private LocalDateTime deletedAt;
+
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     @JsonIgnore 
@@ -104,6 +106,14 @@ public class Attachment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return this.deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     @PrePersist
