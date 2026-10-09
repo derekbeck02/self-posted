@@ -202,12 +202,10 @@ textarea::placeholder {
 }
 
 .attachment-preview {
+    width: 64px;
+    height: 64px;
     display: block;
-    max-width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: contain;
-    margin-bottom: var(--base-margin);
+    object-fit: cover;
     border-radius: var(--base-border-radius);
 }
 
