@@ -91,12 +91,10 @@
                       [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
                       {{ attachment.originalFilename }}
                     </a>
-                  </div>
-
-                  <small>
+                    <small>
                     {{ attachment.mimeType }} • {{ formatBytes(attachment.fileSize) }}
-                  </small>
-
+                    </small>
+                  </div>
                 </div>
               }
             </div>

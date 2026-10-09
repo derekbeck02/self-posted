@@ -194,6 +194,10 @@ textarea::placeholder {
     margin-top: var(--base-margin);
 }
 
+.attachments p {
+    color: var(--muted-text-color);
+}
+
 .attachment-type {
     margin-top: var(--base-margin);
     padding: var(--base-padding);
@@ -222,6 +226,7 @@ textarea::placeholder {
 }
 
 .attachment-info small {
+    margin-top: 2px;
     color: var(--muted-text-color)
 }
 
@@ -233,7 +238,9 @@ textarea::placeholder {
     border-radius: var(--base-border-radius);
     padding: var(--base-padding);
     margin-top: var(--base-margin);
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 531px;
     background-color: var(--attachment-background-color);
 }
 
@@ -304,4 +311,11 @@ article,
 textarea,
 #search-input {
     box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .attachment-item {
+        width: 100%;
+        min-width: 0;
+    }
 }
