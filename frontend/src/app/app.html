@@ -48,7 +48,7 @@
                 aria-label="Edit post"
                 (click)="editPost(post)"
               >
-                <app-pencil-icon></app-pencil-icon>
+                <tabler-icon [icon]="iconPencil"></tabler-icon>
               </button>
 
               <button 
@@ -58,7 +58,7 @@
                 aria-label="Delete post"
                 (click)="deletePost(post.postId)"
               >
-                <app-trash-can-icon></app-trash-can-icon>
+                <tabler-icon [icon]="iconTrash"></tabler-icon>
               </button>
             </div>
           </div>
@@ -87,14 +87,23 @@
                   }
 
                   <div class="attachment-info">
-                    <a 
-                      [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
+                    <span class="attachment-filename">
                       {{ attachment.originalFilename }}
-                    </a>
+                    </span>
                     <small>
                     {{ attachment.mimeType }} • {{ formatBytes(attachment.fileSize) }}
                     </small>
                   </div>
+
+                  <a 
+                    class="attachment-download-button"
+                    [href]="'/api/attachments/' + attachment.attachmentId + '/download'"
+                    title="Download attachment"
+                    aria-label="Download attachment"
+                  >
+                    <tabler-icon [icon]="iconDownload"></tabler-icon>
+                  </a>
+
                 </div>
               }
             </div>

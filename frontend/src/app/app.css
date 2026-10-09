@@ -205,6 +205,27 @@ textarea::placeholder {
     border-radius: var(--base-border-radius);
 }
 
+.attachment-filename {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.attachment-download-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: var(--base-padding);
+    color: var(--muted-text-color);
+    text-decoration: none;
+    border-radius: var(--base-border-radius);
+}
+
+.attachment-download-button:hover {
+    color: var(--primary-color);
+}
+
 .attachment-preview {
     width: 64px;
     height: 64px;
@@ -217,6 +238,7 @@ textarea::placeholder {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    flex: 1;
 }
 
 .attachment-info a {

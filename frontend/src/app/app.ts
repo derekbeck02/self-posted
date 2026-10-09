@@ -5,9 +5,8 @@ import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
-import { PencilIcon } from './icons/actions/pencil-icon/pencil-icon';
-import { TrashCanIcon } from './icons/actions/trash-can-icon/trash-can-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
+import { IconTrash, IconPencil, IconDownload, TablerIconComponent } from '@tabler/icons-angular';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +15,8 @@ import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
   imports: [
     NormalAirplaneIconComponent,
     DamagedAirplaneIconComponent,
-    PencilIcon,
-    TrashCanIcon,
-    FileTypeIcon
+    FileTypeIcon,
+    TablerIconComponent,
   ],
 })
 
@@ -41,6 +39,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
   protected searchQuery = signal('');
+  
+  protected readonly iconDownload = IconDownload;
+  protected readonly iconPencil = IconPencil;
+  protected readonly iconTrash = IconTrash;
+
   selectedFiles: File[] = [];
 
   ngOnInit() {
