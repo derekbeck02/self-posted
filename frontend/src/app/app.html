@@ -86,10 +86,12 @@
                     ></app-file-type-icon>
                   }
 
-                  <a 
-                    [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
-                    {{ attachment.originalFilename }}
-                  </a>
+                  <div class="attachment-info">
+                    <a 
+                      [href]="'/api/attachments/' + attachment.attachmentId + '/download'">
+                      {{ attachment.originalFilename }}
+                    </a>
+                  </div>
 
                   <small>
                     {{ attachment.mimeType }} • {{ formatBytes(attachment.fileSize) }}

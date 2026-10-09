@@ -209,7 +209,26 @@ textarea::placeholder {
     border-radius: var(--base-border-radius);
 }
 
+.attachment-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.attachment-info a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.attachment-info small {
+    color: var(--muted-text-color)
+}
+
 .attachment-item {
+    display: flex;
+    align-items: center;
+    gap: var(--base-padding);
     border: var(--base-border-width) solid var(--attachment-border-color);
     border-radius: var(--base-border-radius);
     padding: var(--base-padding);
