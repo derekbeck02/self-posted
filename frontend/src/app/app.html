@@ -95,15 +95,26 @@
                     </small>
                   </div>
 
-                  <a 
-                    class="attachment-download-button"
-                    [href]="'/api/attachments/' + attachment.attachmentId + '/download'"
-                    title="Download attachment"
-                    aria-label="Download attachment"
-                  >
-                    <tabler-icon [icon]="iconDownload"></tabler-icon>
-                  </a>
+                  <div class="attachment-actions">
+                    <a 
+                      class="icon-button attachment-download-button"
+                      [href]="'/api/attachments/' + attachment.attachmentId + '/download'"
+                      title="Download attachment"
+                      aria-label="Download attachment"
+                    >
+                      <tabler-icon [icon]="iconDownload"></tabler-icon>
+                    </a>
 
+                    <button 
+                      class="icon-button attachment-delete-button"
+                      type="button"
+                      title="Delete attachment"
+                      aria-label="Delete attachment"
+                      (click)="deleteAttachment(attachment.attachmentId)"
+                    >
+                      <tabler-icon [icon]="iconTrash"></tabler-icon>
+                    </button>
+                  </div>
                 </div>
               }
             </div>

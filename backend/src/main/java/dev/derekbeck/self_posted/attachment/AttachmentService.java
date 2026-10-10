@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,7 +41,8 @@ public class AttachmentService {
 
     public void deleteAttachment(Long id) {
         Attachment attachment = getAttachmentById(id);
-        attachmentRepository.delete(attachment);
+        attachment.setDeletedAt(LocalDateTime.now());
+        attachmentRepository.save(attachment);
     }
 
     public Attachment saveUploadedFile(MultipartFile file, Post post) throws IOException {

@@ -198,6 +198,13 @@ textarea::placeholder {
     color: var(--muted-text-color);
 }
 
+.attachment-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+}
+
 .attachment-type {
     margin-top: var(--base-margin);
     padding: var(--base-padding);
@@ -211,15 +218,12 @@ textarea::placeholder {
     white-space: nowrap;
 }
 
+.attachment-delete-button:hover {
+    color: var(--negative-color);
+}
+
 .attachment-download-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    padding: var(--base-padding);
-    color: var(--muted-text-color);
     text-decoration: none;
-    border-radius: var(--base-border-radius);
 }
 
 .attachment-download-button:hover {

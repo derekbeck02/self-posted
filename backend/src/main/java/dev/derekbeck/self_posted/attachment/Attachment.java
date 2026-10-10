@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.derekbeck.self_posted.post.Post;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +36,7 @@ public class Attachment {
 
     private LocalDateTime createdAt;
 
+    @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
     @ManyToOne

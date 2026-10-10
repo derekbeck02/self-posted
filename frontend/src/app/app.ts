@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild, computed } from '@angular/core';
-import { HttpEventType } from '@angular/common/http'
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
 import { Post } from './post';
 import {  forkJoin, tap } from 'rxjs';
@@ -255,4 +255,22 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     this.stickToBottom = distanceFromBottom < 50;
   }
+
+  protected deleteAttachment(attachmentId: number): void {
+  this.postService.deleteAttachment(attachmentId).subscribe({
+    next: () => {
+      this.posts.update(posts =>
+        posts.map(post => ({
+          ...post,
+          attachments: post.attachments.filter(
+            attachment => attachment.attachmentId !== attachmentId
+          )
+        }))
+      );
+    },
+    error: (error: HttpErrorResponse) => {
+      console.error('Failed to delete attachment:', error);
+    }
+  });
+}
 }

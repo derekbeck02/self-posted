@@ -37,4 +37,8 @@ export class PostService {
             }
         );
     }
+    
+    deleteAttachment(id: number) {
+        return this.http.delete<void>(`/api/attachments/${id}`)
+    }
 }
