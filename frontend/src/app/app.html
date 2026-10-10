@@ -127,18 +127,45 @@
 
   <!-- New Post Input Area -->
   <div id="new-post-input-area-container">
-    <div>
+    <div id="new-post-composer">
       <textarea 
       placeholder="Write your post..." 
       [value]="newPostContent()"
       (input)="newPostContent.set($any($event.target).value)"
       (keydown)="onPostKeydown($event)"
-      >
-      </textarea>
-      <div id="new-post-input-area-buttons-container">
-        <button class="primary-button" (click)="createPost()">Post</button>
-        <input #fileInput type="file" multiple (change)="onFileSelected($event)" />
+      ></textarea>
+
+      <div id="new-post-actions">
+        <button
+          class="composer-icon-button"
+          type="button"
+          title="Choose files"
+          aria-label="Choose files"
+          (click)="fileInput.click()"
+        >
+          <tabler-icon [icon]="iconPaperClip"></tabler-icon>
+        </button>
+
+        <button
+          class="send-button"
+          type="button"
+          title="Post"
+          aria-label="Post"
+          (click)="createPost()"
+        >
+          <tabler-icon [icon]="iconArrowNarrowUp"></tabler-icon>
+        </button>
+
+        <input
+          #fileInput
+          class="hidden-file-input"
+          type="file"
+          multiple
+          (change)="onFileSelected($event)"
+        />
       </div>
+    </div>
+
       @if (uploadProgress() > 0) {
         <progress
           [value]="uploadProgress()"
@@ -152,5 +179,4 @@
         <p class="upload-error">{{  uploadError()  }}</p>
       }
   </div>
-
 </div>
