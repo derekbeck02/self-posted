@@ -264,9 +264,8 @@ textarea::placeholder {
     border-radius: var(--base-border-radius);
     padding: var(--base-padding);
     margin-top: var(--base-margin);
-    width: fit-content;
+    width: 530px;
     max-width: 100%;
-    min-width: 531px;
     background-color: var(--attachment-background-color);
 }
 
