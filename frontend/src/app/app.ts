@@ -137,7 +137,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   deletePost(postId: number) {
     this.postService.deletePost(postId).subscribe(() => {
-      this.loadPosts();
+      this.posts.update(posts => 
+        posts.filter(post => post.postId !== postId)
+      );
     });
   }
 
