@@ -86,7 +86,9 @@ progress::-moz-progress-bar {
 
 textarea {
     width: 100%;
-    height: 50px;
+    min-height: 50px;
+    max-height: 180px;
+    overflow-y: hidden;
     resize: none;
     padding: var(--base-padding);
     color: var(--base-text-color);

@@ -129,9 +129,10 @@
   <div id="new-post-input-area-container">
     <div id="new-post-composer">
       <textarea 
+      #postTextarea
       placeholder="Write your post..." 
       [value]="newPostContent()"
-      (input)="newPostContent.set($any($event.target).value)"
+      (input)="newPostContent.set($any($event.target).value); autoResizeTextarea($event)"
       (keydown)="onPostKeydown($event)"
       ></textarea>
 

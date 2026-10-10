@@ -30,6 +30,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('postsContent')
   postsContent!: ElementRef<HTMLDivElement>;
 
+  @ViewChild('postTextarea')
+  postTextarea!: ElementRef<HTMLTextAreaElement>;
+
   private postService = inject(PostService);
   private resizeObserver?: ResizeObserver;
   private stickToBottom = true;
@@ -116,6 +119,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
             this.uploadError.set('');
             this.selectedFiles = [];
             this.newPostContent.set('');
+            this.resetTextarea();
             
             if (this.fileInput) {
               this.fileInput.nativeElement.value = '';
@@ -133,6 +137,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       }
 
       this.newPostContent.set('');
+      this.resetTextarea();
       this.loadPosts();
     });
   }
@@ -282,6 +287,28 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
       event.preventDefault();
       this.createPost();
+    }
+  }
+
+  autoResizeTextarea(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    const maxHeight = 180;
+
+    textarea.style.height = 'auto';
+    
+    if (textarea.scrollHeight > maxHeight) {
+      textarea.style.height = `${maxHeight}px`;
+      textarea.style.overflowY = 'auto';
+    } else {
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.overflowY = 'hidden';
+    }
+  }
+
+  resetTextarea() {
+    if (this.postTextarea) {
+      this.postTextarea.nativeElement.style.height = '';
+      this.postTextarea.nativeElement.style.overflowY = 'hidden';
     }
   }
 }
