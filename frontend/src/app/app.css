@@ -95,6 +95,27 @@ textarea {
     background-color: var(--base-card-color);
     border-radius: var(--base-border-radius);
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--base-border-radius);
+    border: var(--base-border-width) solid var(--base-card-color);
+    background-clip: content-box;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover-color);
 }
 
 textarea::placeholder {
