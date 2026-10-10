@@ -131,7 +131,9 @@
       <textarea 
       placeholder="Write your post..." 
       [value]="newPostContent()"
-      (input)="newPostContent.set($any($event.target).value)">
+      (input)="newPostContent.set($any($event.target).value)"
+      (keydown)="onPostKeydown($event)"
+      >
       </textarea>
       <div id="new-post-input-area-buttons-container">
         <button class="primary-button" (click)="createPost()">Post</button>

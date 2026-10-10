@@ -273,6 +273,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     error: (error: HttpErrorResponse) => {
       console.error('Failed to delete attachment:', error);
     }
-  });
-}
+    });
+  }
+
+  onPostKeydown(event: KeyboardEvent) {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+      event.preventDefault();
+      this.createPost();
+    }
+  }
 }
