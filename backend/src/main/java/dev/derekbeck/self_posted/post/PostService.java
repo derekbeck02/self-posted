@@ -4,13 +4,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dev.derekbeck.self_posted.attachment.AttachmentRepository;
+import jakarta.transaction.Transactional;
+
 @Service 
 public class PostService {
     
     private final PostRepository postRepository;
 
-    public PostService(PostRepository postRepository) {
+    private final AttachmentRepository attachmentRepository;
+
+    public PostService(PostRepository postRepository, AttachmentRepository attachmentRepository) {
         this.postRepository = postRepository;
+        this.attachmentRepository = attachmentRepository;
     }
 
     public List<Post> getAllPosts() {
@@ -33,8 +39,10 @@ public class PostService {
         return postRepository.save(existingPost);
     }
 
+    @Transactional 
     public void deletePost(Long id) {
         Post existingPost = getPostById(id);
+        attachmentRepository.deleteByPostPostId(id);
         postRepository.delete(existingPost);
     }
 }
