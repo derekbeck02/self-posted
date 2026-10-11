@@ -6,6 +6,10 @@ It provides a simple personal feed where posts can contain text, images, and oth
 
 > This project is still under active development.
 
+## Screenshot
+
+<img width="1919" height="905" alt="self-posted_screenshot" src="https://github.com/user-attachments/assets/c9e3f856-3543-486c-97a7-e5baa3a155cc" />
+
 ## Features
 
 - Text and file posts
