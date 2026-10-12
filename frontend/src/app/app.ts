@@ -72,10 +72,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.resizeObserver?.disconnect();
   }
 
-  loadPosts() {
+  loadPosts(scrollToBottom = true) {
     this.postService.getPosts().subscribe(posts => {
       this.posts.set(posts);
-      this.scrollToBottom();
+
+      if (scrollToBottom) {
+        this.scrollToBottom();
+      }
     });
   }
 
@@ -370,9 +373,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       );
 
       input.value = '';
-      this.loadPosts();
+      this.loadPosts(false);
     },
-    
+
     error: (error: HttpErrorResponse) => {
       console.error('Failed to add attachment:', error);
     }
