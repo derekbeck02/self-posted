@@ -469,4 +469,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       upload => upload.postId === postId
     );
   }
+
+  clearSelectedFiles(event: Event) {
+    event.stopPropagation();
+    this.selectedFiles = [];
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
+  }
 }

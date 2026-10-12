@@ -186,15 +186,43 @@
       ></textarea>
 
       <div id="new-post-actions">
-        <button
-          class="composer-icon-button"
-          type="button"
-          title="Choose files"
-          aria-label="Choose files"
-          (click)="fileInput.click()"
-        >
-          <tabler-icon [icon]="iconPaperClip"></tabler-icon>
-        </button>
+        <div class="attachment-button-wrapper">
+          <button
+            class="composer-icon-button"
+            type="button"
+            title="Choose files"
+            aria-label="Choose files"
+            (click)="fileInput.click()"
+          >
+            <tabler-icon [icon]="iconPaperClip"></tabler-icon>
+          </button>
+
+          @if (selectedFiles.length > 0) {
+            <button
+              class="attachment-count"
+              type="button"
+              title="Remove selected attachments"
+              aria-label="Remove selected attachments"
+              (click)="clearSelectedFiles($event)"
+            >
+              <span class="attachment-count-number">
+                {{ selectedFiles.length }}
+              </span>
+
+              <span class="attachment-count-x">
+                ×
+              </span>
+            </button>
+          }
+
+          <input
+            #fileInput
+            class="hidden-file-input"
+            type="file"
+            multiple
+            (change)="onFileSelected($event)"
+          />
+        </div>
 
         <button
           class="send-button"
@@ -206,13 +234,6 @@
           <tabler-icon [icon]="iconArrowNarrowUp"></tabler-icon>
         </button>
 
-        <input
-          #fileInput
-          class="hidden-file-input"
-          type="file"
-          multiple
-          (change)="onFileSelected($event)"
-        />
       </div>
     </div>
     
