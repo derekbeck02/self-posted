@@ -110,7 +110,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       }
 
       const uploads: PendingUpload[] = files.map(file => ({
-        id: crypto.randomUUID(),
+        id: this.createId(),
         postId: post.postId,
         file,
         progress: 0
@@ -383,7 +383,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const files = Array.from(input.files);
 
     const uploads: PendingUpload[] = files.map(file => ({
-      id: crypto.randomUUID(),
+      id: this.createId(),
       postId,
       file,
       progress: 0
@@ -476,5 +476,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
     }
+  }
+
+  private createId(): string {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+
+    return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   }
 }
