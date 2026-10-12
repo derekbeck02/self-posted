@@ -41,6 +41,24 @@
             <small>{{ formatDate(post.createdAt) }}</small>
 
             <div class="post-actions">
+              <button
+                  class="icon-button attachment-add-button"
+                  type="button"
+                  title="Add attachment"
+                  aria-label="Add attachment"
+                  (click)="existingPostFileInput.click()"
+                >
+                  <tabler-icon [icon]="iconPlus"></tabler-icon>
+                </button>
+
+                <input
+                  #existingPostFileInput
+                  class="hidden-file-input"
+                  type="file"
+                  multiple
+                  (change)="onExistingPostFilesSelected($event, post.postId)"
+                >
+
               <button 
                 class="icon-button edit-button"
                 type="button"
@@ -71,26 +89,8 @@
             <div class="attachments">
               <div class="attachments-header">
                 <p>Attachments: </p>
-
-                <button
-                  class="icon-button attachment-add-button"
-                  type="button"
-                  title="Add attachment"
-                  aria-label="Add attachment"
-                  (click)="existingPostFileInput.click()"
-                >
-                  <tabler-icon [icon]="iconPlus"></tabler-icon>
-                </button>
-
-                <input
-                  #existingPostFileInput
-                  class="hidden-file-input"
-                  type="file"
-                  multiple
-                  (change)="onExistingPostFilesSelected($event, post.postId)"
-                >
               </div>
-
+              
               @for (attachment of post.attachments; track attachment.attachmentId) {
                 <div class="attachment-item">
 
