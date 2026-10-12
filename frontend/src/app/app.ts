@@ -38,7 +38,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private resizeObserver?: ResizeObserver;
   private stickToBottom = true;
 
-  protected uploadProgress = signal(0);
   protected uploadError = signal('');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
@@ -89,64 +88,96 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    const files = [...this.selectedFiles];
+
     this.postService.createPost(content).subscribe(post => {
-      if (this.selectedFiles.length > 0) {
-        this.uploadError.set('');
-        this.uploadProgress.set(0);
-        
-        const totalBytes = this.selectedFiles.reduce(
-          (total, file) => total + file.size,
-          0
-        );
+      this.posts.update(posts => [
+        ...posts,
+        post
+      ]);
 
-        const uploadedBytes = new Map<File, number>();
+      this.newPostContent.set('');
+      this.selectedFiles = [];
+      this.uploadError.set('');
+      this.resetTextarea();
 
-        const uploadRequests = this.selectedFiles.map(file =>
-          this.postService.uploadAttachment(post.postId, file).pipe(
-            tap(event => {
-              if (event.type === HttpEventType.UploadProgress) {
-                uploadedBytes.set(file, event.loaded);
+      if(this.fileInput) {
+        this.fileInput.nativeElement.value = '';
+      }
 
-              const uploadedTotal = Array.from(uploadedBytes.values()).reduce((total, loaded) => total + loaded, 0);
-
-              const percentage = Math.round(
-                (uploadedTotal / totalBytes) * 100
-              );
-
-              this.uploadProgress.set(percentage);
-              }
-            })
-          )
-        );
-
-        forkJoin(uploadRequests).subscribe({
-          next: () => {
-            this.uploadProgress.set(0);
-            this.uploadError.set('');
-            this.selectedFiles = [];
-            this.newPostContent.set('');
-            this.resetTextarea();
-            
-            if (this.fileInput) {
-              this.fileInput.nativeElement.value = '';
-            }
-
-            this.loadPosts();
-          },
-          error: () => {
-            this.uploadError.set('Upload failed. Please try again.');
-            this.uploadProgress.set(0);
-          }
-        });
-
+      if (files.length === 0) {
         return;
       }
 
-      this.newPostContent.set('');
-      this.resetTextarea();
-      this.loadPosts();
+      const uploads: PendingUpload[] = files.map(file => ({
+        id: crypto.randomUUID(),
+        postId: post.postId,
+        file,
+        progress: 0
+      }));
+
+      this.pendingUploads.update(current => [
+        ...current,
+        ...uploads
+      ]);
+
+      const uploadRequests = uploads.map(upload =>
+        this.postService
+          .uploadAttachment(post.postId, upload.file)
+          .pipe(
+            tap(event => {
+              if (
+                event.type === HttpEventType.UploadProgress &&
+                event.total
+              ) {
+                const percentage = Math.round(
+                  (event.loaded / event.total) * 100
+                );
+
+                this.pendingUploads.update(current => 
+                  current.map(item =>
+                    item.id === upload.id
+                      ? {
+                        ...item,
+                        progress: percentage
+                      }
+                      : item
+                  )
+                );
+              }
+            })
+          )
+      );
+
+      forkJoin(uploadRequests).subscribe({
+      next: () => {
+        const uploadIds = new Set(
+          uploads.map(upload => upload.id)
+        );
+
+        this.pendingUploads.update(current =>
+          current.filter(
+            upload => !uploadIds.has(upload.id)
+          )
+        );
+
+          this.loadPosts(false);
+      },
+          
+      error: (error: HttpErrorResponse) => {
+        console.error(
+          'Failed to upload attachment:',
+          error
+        );
+
+        this.uploadError.set(
+          'Upload failed. Please try again.'
+        );
+      }
     });
-  }
+
+      });
+    }
 
   deletePost(postId: number) {
     this.postService.deletePost(postId).subscribe(() => {

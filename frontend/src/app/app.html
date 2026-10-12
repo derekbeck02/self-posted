@@ -215,16 +215,7 @@
         />
       </div>
     </div>
-
-      @if (uploadProgress() > 0) {
-        <progress
-          [value]="uploadProgress()"
-          max="100">
-        </progress>
-
-        <span>{{ uploadProgress() }}%</span>
-      }
-
+    
       @if (uploadError()) {
         <p class="upload-error">{{  uploadError()  }}</p>
       }
