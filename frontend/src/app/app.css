@@ -310,6 +310,20 @@ textarea::placeholder {
     opacity: 0.7;
 }
 
+.attachment-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.attachment-header p {
+    margin: 0;
+}
+
+.attachment-add-button:hover {
+    color: var(--primary-color);
+}
+
 .composer-icon-button {
     display: flex;
     align-items: center;

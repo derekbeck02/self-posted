@@ -6,7 +6,7 @@ import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
-import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, TablerIconComponent } from '@tabler/icons-angular';
+import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent } from '@tabler/icons-angular';
 
 @Component({
   selector: 'app-root',
@@ -48,6 +48,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconTrash = IconTrash;
   protected readonly iconArrowNarrowUp = IconArrowNarrowUp;
   protected readonly iconPaperClip = IconPaperclip;
+  protected readonly iconPlus = IconPlus;
 
   selectedFiles: File[] = [];
 
@@ -311,4 +312,28 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       this.postTextarea.nativeElement.style.overflowY = 'hidden';
     }
   }
+
+  onExistingPostFilesSelected(event: Event, postId: number) {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+
+    const files = Array.from(input.files);
+
+    const uploadRequests = files.map(file =>
+      this.postService.uploadAttachment(postId, file)
+    );
+
+    forkJoin(uploadRequests).subscribe({
+    next: () => {
+      input.value = '';
+      this.loadPosts();
+    },
+    error: (error: HttpErrorResponse) => {
+      console.error('Failed to add attachment:', error);
+    }
+  });
+}
 }
