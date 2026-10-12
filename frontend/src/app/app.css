@@ -303,11 +303,22 @@ textarea::placeholder {
     width: 530px;
     max-width: 100%;
     background-color: var(--attachment-background-color);
+    position: relative;
 }
 
 .attachment-item small {
     display: block;
     opacity: 0.7;
+}
+
+.attachment-upload-progress {
+    position: absolute;
+    top: calc(-1 * var(--base-border-width));
+    left: calc(-1 * var(--base-border-width));
+    height: var(--base-border-width);
+    background: var(--primary-color);
+    border-radius: var(--base-border-radius) 0 0 0;
+    transition: width 0.15s ease;
 }
 
 .attachment-header {

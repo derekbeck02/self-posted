@@ -7,6 +7,7 @@ import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-ic
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
 import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent } from '@tabler/icons-angular';
+import { PendingUpload } from './pending-upload';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, 
     DamagedAirplaneIconComponent,
     FileTypeIcon,
     TablerIconComponent,
-  ],
+],
 })
 
 export class App implements OnInit, AfterViewInit, OnDestroy {
@@ -42,6 +43,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
   protected searchQuery = signal('');
+  protected pendingUploads = signal<PendingUpload[]>([]);
   
   protected readonly iconDownload = IconDownload;
   protected readonly iconPencil = IconPencil;
@@ -322,18 +324,64 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     const files = Array.from(input.files);
 
-    const uploadRequests = files.map(file =>
-      this.postService.uploadAttachment(postId, file)
-    );
+    const uploads: PendingUpload[] = files.map(file => ({
+      id: crypto.randomUUID(),
+      postId,
+      file,
+      progress: 0
+    }));
+
+    this.pendingUploads.update(current => [
+      ...current,
+      ...uploads
+    ]);
+
+    const uploadRequests = uploads.map(upload =>
+      this.postService.uploadAttachment(postId, upload.file).pipe(
+        tap(event => {
+          if (
+            event.type === HttpEventType.UploadProgress &&
+            event.total
+          ) {
+            const percentage = Math.round(
+              (event.loaded / event.total) * 100
+            );
+
+            this.pendingUploads.update(current => 
+              current.map(item =>
+                item.id === upload.id
+                  ? { ...item, progress: percentage }
+                  : item
+              )
+            );
+          }
+        })
+      )
+    )
 
     forkJoin(uploadRequests).subscribe({
     next: () => {
+      const uploadIds = new Set(uploads.map(upload => upload.id));
+
+      this.pendingUploads.update(current => 
+        current.filter(
+          upload => !uploadIds.has(upload.id)
+        )
+      );
+
       input.value = '';
       this.loadPosts();
     },
+    
     error: (error: HttpErrorResponse) => {
       console.error('Failed to add attachment:', error);
     }
   });
-}
+  }
+
+  getPendingUploadsForPost(postId: number) {
+    return this.pendingUploads().filter(
+      upload => upload.postId === postId
+    );
+  }
 }
