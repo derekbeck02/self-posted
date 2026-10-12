@@ -90,7 +90,35 @@
               <div class="attachments-header">
                 <p>Attachments: </p>
               </div>
+
+              <!-- Pending upload attachments -->
+                @for (upload of getPendingUploadsForPost(post.postId); track upload.id) {
+                <div
+                  class="attachment-item pending-attachmentStyle="
+                >
+                  <div
+                    class="attachment-upload-progress"
+                    [style.width.%]="upload.progress"
+                  ></div>
+                  <app-file-type-icon
+                    [filename]="upload.file.name"
+                  ></app-file-type-icon>
+                  <div class="attachment-info">
+                    <span class="attachment-filename">
+                      {{ upload.file.name }}
+                    </span>
+
+                    <small>
+                      {{ upload.file.type || 'Unkown type' }}
+                      •
+                      {{ formatBytes(upload.file.size) }}
+                    </small>
+                  </div>
+
+                </div>
+              }
               
+              <!-- Finished uploading attachments -->
               @for (attachment of post.attachments; track attachment.attachmentId) {
                 <div class="attachment-item">
 
@@ -135,33 +163,6 @@
                       <tabler-icon [icon]="iconTrash"></tabler-icon>
                     </button>
                   </div>
-                </div>
-              }
-
-              <!-- Pending upload attachments -->
-                @for (upload of getPendingUploadsForPost(post.postId); track upload.id) {
-                <div
-                  class="attachment-item pending-attachmentStyle="
-                >
-                  <div
-                    class="attachment-upload-progress"
-                    [style.width.%]="upload.progress"
-                  ></div>
-                  <app-file-type-icon
-                    [filename]="upload.file.name"
-                  ></app-file-type-icon>
-                  <div class="attachment-info">
-                    <span class="attachment-filename">
-                      {{ upload.file.name }}
-                    </span>
-
-                    <small>
-                      {{ upload.file.type || 'Unkown type' }}
-                      •
-                      {{ formatBytes(upload.file.size) }}
-                    </small>
-                  </div>
-
                 </div>
               }
 
