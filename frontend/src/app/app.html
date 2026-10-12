@@ -122,7 +122,7 @@
               @for (attachment of post.attachments; track attachment.attachmentId) {
                 <div class="attachment-item">
 
-                  @if (attachment.mimeType.startsWith('image/')) {
+                  @if (attachment.mimeType.startsWith('image/') && (attachment.mimeType !== 'image/svg+xml')) {
                     <img
                       class="attachment-preview"
                       [src]="'/api/attachments/' + attachment.attachmentId + '/download'"
