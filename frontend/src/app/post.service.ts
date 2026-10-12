@@ -2,6 +2,7 @@ import { Service, inject } from '@angular/core';
 import { HttpClient, HttpEvent} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post } from './post';
+import { Attachment } from './attachment'
 
 @Service()
 export class PostService {
@@ -24,11 +25,11 @@ export class PostService {
         return this.http.put<Post>(`${this.apiUrl}/${postId}`, { content });
     }
 
-    uploadAttachment(postId: number, file: File): Observable<HttpEvent<unknown>> {
+    uploadAttachment(postId: number, file: File): Observable<HttpEvent<Attachment>> {
         const formData = new FormData();
         formData.append('file', file);
 
-        return this.http.post(
+        return this.http.post<Attachment>(
             `/api/attachments/post/${postId}`,
             formData,
             {

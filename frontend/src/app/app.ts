@@ -134,47 +134,71 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
                   (event.loaded / event.total) * 100
                 );
 
-                this.pendingUploads.update(current => 
+                this.pendingUploads.update(current =>
                   current.map(item =>
                     item.id === upload.id
                       ? {
-                        ...item,
-                        progress: percentage
-                      }
+                          ...item,
+                          progress: percentage
+                        }
                       : item
                   )
                 );
               }
+
+              if (
+                event.type === HttpEventType.Response &&
+                event.body
+              ) {
+                const attachment = event.body;
+
+                this.posts.update(posts =>
+                  posts.map(existingPost =>
+                    existingPost.postId === post.postId
+                      ? {
+                          ...existingPost,
+                          attachments: [
+                            attachment,
+                            ...existingPost.attachments
+                          ]
+                        }
+                      : existingPost
+                  )
+                );
+
+                this.pendingUploads.update(current =>
+                  current.filter(
+                    item => item.id !== upload.id
+                  )
+                );
+              }
+
             })
           )
       );
 
       forkJoin(uploadRequests).subscribe({
-      next: () => {
-        const uploadIds = new Set(
-          uploads.map(upload => upload.id)
-        );
+        error: (error: HttpErrorResponse) => {
+          console.error(
+            'Failed to upload attachment:',
+            error
+          );
 
-        this.pendingUploads.update(current =>
-          current.filter(
-            upload => !uploadIds.has(upload.id)
-          )
-        );
-
-          this.loadPosts(false);
-      },
+          this.uploadError.set(
+            'Upload failed. Please try again.'
+          );
           
-      error: (error: HttpErrorResponse) => {
-        console.error(
-          'Failed to upload attachment:',
-          error
-        );
+          const uploadIds = new Set(
+            uploads.map(upload => upload.id)
+          );
 
-        this.uploadError.set(
-          'Upload failed. Please try again.'
-        );
-      }
-    });
+          this.pendingUploads.update(current =>
+            current.filter(
+              upload => !uploadIds.has(upload.id)
+            )
+          );
+        }
+      });
 
       });
     }
@@ -381,11 +405,38 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
               (event.loaded / event.total) * 100
             );
 
-            this.pendingUploads.update(current => 
+            this.pendingUploads.update(current =>
               current.map(item =>
                 item.id === upload.id
                   ? { ...item, progress: percentage }
                   : item
+              )
+            );
+          }
+
+          if (
+            event.type === HttpEventType.Response &&
+            event.body
+          ) {
+            const attachment = event.body;
+
+            this.posts.update(posts =>
+              posts.map(post =>
+                post.postId === postId
+                  ? {
+                    ...post,
+                    attachments: [
+                    attachment,
+                    ...post.attachments
+                    ]
+                  }
+                  : post
+              )
+            );
+
+            this.pendingUploads.update(current =>
+              current.filter(
+                item => item.id !== upload.id
               )
             );
           }
@@ -395,20 +446,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     forkJoin(uploadRequests).subscribe({
     next: () => {
-      const uploadIds = new Set(uploads.map(upload => upload.id));
-
-      this.pendingUploads.update(current => 
-        current.filter(
-          upload => !uploadIds.has(upload.id)
-        )
-      );
-
       input.value = '';
-      this.loadPosts(false);
     },
 
     error: (error: HttpErrorResponse) => {
       console.error('Failed to add attachment:', error);
+      const uploadIds = new Set(
+        uploads.map(upload => upload.id)
+      );
+
+      this.pendingUploads.update(current =>
+        current.filter(
+          upload => !uploadIds.has(upload.id)
+        )
+      );
     }
   });
   }
