@@ -4,10 +4,19 @@
       <app-normal-airplane-icon></app-normal-airplane-icon>
     </div>
 
-    <div>
+    <div id="header-text">
       <h1>Self-Posted</h1>
       <small>Personal Workspace</small>
     </div>
+
+    <button id="open-settings-button"
+      type="button"
+      title="Add attachment"
+      aria-label="Add attachment"
+      (click)="toggleSettings()"
+    >
+    Settings
+    </button>
   </header>
 
   <!-- Search Textbox -->
@@ -240,5 +249,23 @@
       @if (uploadError()) {
         <p class="upload-error">{{  uploadError()  }}</p>
       }
+
+    <div class="settings-window">
+      @if (settingsOpen === true) {
+        <div id="full-div-blur"></div>
+        <div id="menu-box">
+          <button
+          class="close-settings-button"
+          type="button"
+          title="Close settings"
+          aria-label="Close settings"
+          (click)="toggleSettings()"
+          >
+          Close
+          </button>
+        </div>
+      }
+    </div>
+    
   </div>
 </div>

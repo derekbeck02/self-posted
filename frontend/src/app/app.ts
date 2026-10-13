@@ -37,6 +37,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private postService = inject(PostService);
   private resizeObserver?: ResizeObserver;
   private stickToBottom = true;
+  private settingsOpen = false;
 
   protected uploadError = signal('');
   protected posts = signal<Post[]>([]);
@@ -485,4 +486,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   }
+
+  toggleSettings() {
+    this.settingsOpen = !this.settingsOpen;
+  }
+  
 }

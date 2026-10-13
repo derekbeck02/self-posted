@@ -13,6 +13,10 @@ a:hover {
     margin-bottom: var(--base-margin);
 }
 
+#app-header button {
+    margin-left: auto;
+}
+
 #app-header h1 {
     margin: 0;
     font-size: 1.7rem;
@@ -162,6 +166,37 @@ textarea::placeholder {
     gap: 6px;
     flex-shrink: 0;
     margin-bottom: 7px;
+}
+
+#menu-box {
+    display: flex;
+    position: absolute;
+    offset: 50px;
+    justify-content: center;
+    align-items: center;
+    min-width: 90%;
+    min-height: 50%;
+    
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+
+    background-color: var(--base-card-color);
+    border-radius: var(--base-border-radius);
+    border: var(--base-border-width) solid var(--base-border-color);
+    z-index: 20;
+
+}
+
+#full-div-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(var(--base-blur));
+    z-index: 10;
 }
 
 #posts-container {
@@ -407,6 +442,10 @@ textarea::placeholder {
     width: 90px;
     height: 60px;
     margin-bottom: var(--base-margin);
+}
+
+.open-settings-button {
+    align-self:flex-end;
 }
 
 .post-header {

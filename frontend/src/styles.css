@@ -52,6 +52,9 @@
     --base-width: 90vw;
     --base-border-radius: 3px;
     --base-border-width: 2px;
+
+    /* Other */
+    --base-blur: 1px;
 }
 
 *,
