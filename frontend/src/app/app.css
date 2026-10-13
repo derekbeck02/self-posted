@@ -478,9 +478,6 @@ textarea::placeholder {
 
 .icon-button:hover {
     background: transparent;
-}
-
-.edit-button:hover {
     color: var(--primary-color);
 }
 

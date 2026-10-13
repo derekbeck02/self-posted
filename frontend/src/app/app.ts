@@ -6,7 +6,7 @@ import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
-import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent } from '@tabler/icons-angular';
+import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
 
 @Component({
@@ -51,6 +51,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconArrowNarrowUp = IconArrowNarrowUp;
   protected readonly iconPaperClip = IconPaperclip;
   protected readonly iconPlus = IconPlus;
+  protected readonly iconSettings = IconSettings;
 
   selectedFiles: File[] = [];
 
@@ -490,5 +491,5 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   toggleSettings() {
     this.settingsOpen = !this.settingsOpen;
   }
-  
+
 }
