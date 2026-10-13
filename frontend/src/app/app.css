@@ -481,7 +481,8 @@ textarea::placeholder {
     color: var(--primary-color);
 }
 
-.delete-button:hover {
+.delete-button:hover,
+.close-settings-button:hover {
     color: var(--negative-color);
 }
 
