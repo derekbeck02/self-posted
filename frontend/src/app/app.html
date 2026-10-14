@@ -254,16 +254,31 @@
     <div class="settings-window">
       @if (settingsOpen === true) {
         <div id="full-div-blur"></div>
-        <div id="menu-box">
-          <button
-          class="icon-button close-settings-button"
-          type="button"
-          title="Close settings"
-          aria-label="Close settings"
-          (click)="toggleSettings()"
-          >
-            <tabler-icon [icon]="iconX"></tabler-icon>
-          </button>
+        <div id="settings-menu-box">
+          <header id="settings-header">
+            <h3>Settings</h3>
+            <button
+            class="icon-button close-settings-button"
+            type="button"
+            title="Close settings"
+            aria-label="Close settings"
+            (click)="toggleSettings()"
+            >
+              <tabler-icon [icon]="iconX"></tabler-icon>
+            </button>
+          </header>
+
+          <div id="settings-container">
+            <div id="settings-categories">
+              <button id="general-settings-button">General</button>
+              <button id="general-settings-button">Theme</button>
+            </div>
+            <div id="general-settings">
+              <p>Setting 1</p>
+              <p>Setting 2</p>
+              <p>Setting 3</p>
+            </div>
+          </div>
         </div>
       }
     </div>

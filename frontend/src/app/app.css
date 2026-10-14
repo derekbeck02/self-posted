@@ -168,24 +168,23 @@ textarea::placeholder {
     margin-bottom: 7px;
 }
 
-#menu-box {
+#settings-menu-box {
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
     position: absolute;
-    offset: 50px;
     justify-content: center;
     align-items: center;
-    min-width: 90%;
-    min-height: 50%;
-    
+    max-width: 90%;
+    max-height: 90%;
+    padding: var(--base-padding);
     top: 50%;
     right: 50%;
     transform: translate(50%, -50%);
-
     background-color: var(--base-card-color);
     border-radius: var(--base-border-radius);
     border: var(--base-border-width) solid var(--base-border-color);
     z-index: 20;
-
 }
 
 #full-div-blur {
@@ -259,6 +258,28 @@ textarea::placeholder {
 #new-post-input-area-container {
     width: 100%;
     max-width: 100%;
+}
+
+#settings-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--base-margin);
+}
+
+#settings-header button {
+    margin-left: auto;
+}
+
+#settings-header h1 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+#settings-header small {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted-text-color);
 }
 
 .attachments {
