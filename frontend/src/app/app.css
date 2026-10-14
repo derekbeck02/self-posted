@@ -282,6 +282,22 @@ textarea::placeholder {
     color: var(--muted-text-color);
 }
 
+.settings-category-button {
+    color: var(--base-text-color);
+    background-color: transparent;
+    padding: var(--base-padding);
+    margin: 8px;
+    border: var(--base-border-width) solid var(--base-border-color);
+}
+
+.settings-category-button-selected {
+    border-bottom-color: var(--primary-color);
+}
+
+.settings-category-button:hover {
+    color: var(--primary-color);
+}
+
 .attachments {
     margin-top: var(--base-margin);
 }

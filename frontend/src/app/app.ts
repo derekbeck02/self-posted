@@ -38,12 +38,15 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private resizeObserver?: ResizeObserver;
   private stickToBottom = true;
   private settingsOpen = false;
-
+  
   protected uploadError = signal('');
   protected posts = signal<Post[]>([]);
   protected newPostContent = signal('');
   protected searchQuery = signal('');
   protected pendingUploads = signal<PendingUpload[]>([]);
+  protected generalSettingsCategoryString = 'general';
+  protected themeSettingsCategoryString = 'theme';
+  protected selectedSettingsCategory = this.generalSettingsCategoryString;
   
   protected readonly iconDownload = IconDownload;
   protected readonly iconPencil = IconPencil;
@@ -493,4 +496,17 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.settingsOpen = !this.settingsOpen;
   }
 
+  changeSettingsCategory(selectedSettingsCategoryId: string): void {
+  if (
+    selectedSettingsCategoryId !== this.generalSettingsCategoryString &&
+    selectedSettingsCategoryId !== this.themeSettingsCategoryString
+  ) {
+    console.warn(
+      `Could not find settings category: ${selectedSettingsCategoryId}`
+    );
+    return;
+  }
+
+  this.selectedSettingsCategory = selectedSettingsCategoryId;
+  } 
 }

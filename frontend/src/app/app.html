@@ -270,14 +270,42 @@
 
           <div id="settings-container">
             <div id="settings-categories">
-              <button id="general-settings-button">General</button>
-              <button id="general-settings-button">Theme</button>
+              <button
+                id="general-settings-button"
+                class="settings-category-button"
+                [class.settings-category-button-selected]="selectedSettingsCategory === generalSettingsCategoryString"
+                type="button"
+                title="General settings"
+                aria-label="General settings"
+                (click)="changeSettingsCategory(generalSettingsCategoryString)"
+              >General</button>
+              <button
+                id="theme-settings-button"
+                class="settings-category-button"
+                [class.settings-category-button-selected]="
+                  selectedSettingsCategory === themeSettingsCategoryString
+                "
+                type="button"
+                title="Theme settings"
+                aria-label="Theme settings"
+                (click)="changeSettingsCategory(themeSettingsCategoryString)"
+              >Theme</button>
             </div>
-            <div id="general-settings">
-              <p>Setting 1</p>
-              <p>Setting 2</p>
-              <p>Setting 3</p>
-            </div>
+            @if (selectedSettingsCategory === generalSettingsCategoryString) {
+              <div id="general-settings">
+                <p>General setting 1</p>
+                <p>General setting 2</p>
+                <p>General setting 3</p>
+              </div>
+            }
+
+            @if (selectedSettingsCategory === themeSettingsCategoryString) {
+              <div id="theme-settings">
+                <p>Theme setting 1</p>
+                <p>Theme setting 2</p>
+                <p>Theme setting 3</p>
+              </div>
+            }
           </div>
         </div>
       }
