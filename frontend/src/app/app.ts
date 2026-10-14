@@ -9,6 +9,8 @@ import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
 import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
 
+type AppTheme = 'default' | 'rose' | 'blue';
+
 @Component({
   selector: 'app-root',
   styleUrl: './app.css',
@@ -56,10 +58,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconPlus = IconPlus;
   protected readonly iconSettings = IconSettings;
   protected readonly iconX = IconX;
+  protected currentTheme: AppTheme = 'default';
 
   selectedFiles: File[] = [];
 
   ngOnInit() {
+    this.applyTheme(this.currentTheme);
     this.loadPosts();
   }
 
@@ -497,16 +501,25 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   changeSettingsCategory(selectedSettingsCategoryId: string): void {
-  if (
-    selectedSettingsCategoryId !== this.generalSettingsCategoryString &&
-    selectedSettingsCategoryId !== this.themeSettingsCategoryString
-  ) {
-    console.warn(
-      `Could not find settings category: ${selectedSettingsCategoryId}`
-    );
-    return;
+    if (
+      selectedSettingsCategoryId !== this.generalSettingsCategoryString &&
+      selectedSettingsCategoryId !== this.themeSettingsCategoryString
+    ) {
+      console.warn(
+        `Could not find settings category: ${selectedSettingsCategoryId}`
+      );
+      return;
+    }
+
+    this.selectedSettingsCategory = selectedSettingsCategoryId;
   }
 
-  this.selectedSettingsCategory = selectedSettingsCategoryId;
-  } 
+  changeTheme(newTheme: AppTheme): void {
+    this.currentTheme = newTheme;
+    this.applyTheme(newTheme);
+  }
+
+  private applyTheme(theme: AppTheme): void {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 }

@@ -1,10 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    /* Branding Palette */
-    --primary-dark: #7900D9;
-    --primary: #A970FF;
-    --primary-light: #D1A7FF;
+    /* Default Palette */
+    --default-theme-primary-dark: #7900D9;
+    --default-theme-primary: #A970FF;
+    --default-theme-primary-light: #D1A7FF;
+
+    /* Rose Theme Palette */
+    --rose-theme-primary-dark: #64242F;
+    --rose-theme-primary: #844446;
+    --rose-theme-primary-light: #FC8F8F;
+
+    /* Blue Theme Palette */
+    --blue-theme-primary-dark: #06457F;
+    --blue-theme-primary: #0474C4;
+    --blue-theme-primary-light: #A8C4EC;
     
     /* Neutral Palette */
     --gray-darkest: #17171C;
@@ -20,9 +30,9 @@
     --red: #FF4D4D;
 
     /* Normal logo colors */
-    --logo-primary-dark: var(--primary-dark);
-    --logo-primary: var(--primary);
-    --logo-primary-light: var(--primary-light);
+    --logo-primary-dark: var(--default-theme-primary-dark);
+    --logo-primary: var(--default-theme-primary);
+    --logo-primary-light: var(--default-theme-primary-light);
     --logo-white: var(--white);
 
     /* Damaged logo colors */
@@ -31,8 +41,8 @@
     --logo-error-white: var(--white);
     
     /* UI colors */
-    --primary-color: var(--primary);
-    --primary-hover-color: var(--primary-light);
+    --primary-color: var(--default-theme-primary);
+    --primary-hover-color: var(--default-theme-primary-light);
     --muted-text-color: var(--gray-lighter);
     --negative-color: var(--red);
     --base-background-color: var(--gray-darkest);
@@ -55,6 +65,24 @@
 
     /* Other */
     --base-blur: 1px;
+}
+
+:root[data-theme="rose"] {
+    --primary-color: var(--rose-theme-primary);
+    --primary-hover-color: var(--rose-theme-primary-light);
+    
+    --logo-primary-dark: var(--rose-theme-primary);
+    --logo-primary: var(--rose-theme-primary);
+    --logo-primary-light: var(--rose-theme-primary-light);
+}
+
+:root[data-theme="blue"] {
+    --primary-color: var(--blue-theme-primary);
+    --primary-hover-color: var(--blue-theme-primary-light);
+
+    --logo-primary-dark: var(--blue-theme-primary-dark);
+    --logo-primary: var(--blue-theme-primary);
+    --logo-primary-light: var(--blue-theme-primary-light);
 }
 
 *,
@@ -109,7 +137,7 @@ input[type="file"]::file-selector-button {
 }
 
 .primary-button {
-    background-color: var(--primary-color);  
+    background-color: var(--default-theme-primary);  
 }
 
 .primary-button:hover {

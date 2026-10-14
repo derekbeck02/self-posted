@@ -291,6 +291,7 @@
                 (click)="changeSettingsCategory(themeSettingsCategoryString)"
               >Theme</button>
             </div>
+
             @if (selectedSettingsCategory === generalSettingsCategoryString) {
               <div id="general-settings">
                 <p>General setting 1</p>
@@ -301,7 +302,17 @@
 
             @if (selectedSettingsCategory === themeSettingsCategoryString) {
               <div id="theme-settings">
-                <p>Theme setting 1</p>
+                <label for="theme-selector">Choose a theme: </label>
+                <select 
+                  name="theme-selector" 
+                  id="theme-selector"
+                  [value]="currentTheme"
+                  (change)="changeTheme($any($event.target).value)"
+                >
+                  <option value="default">Default</option>
+                  <option value="rose">Rose</option>
+                  <option value="blue">Blue</option>
+                </select>
                 <p>Theme setting 2</p>
                 <p>Theme setting 3</p>
               </div>
