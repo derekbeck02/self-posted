@@ -63,6 +63,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   selectedFiles: File[] = [];
 
   ngOnInit() {
+    const savedTheme = localStorage.getItem('theme') as AppTheme | null;
+    if (savedTheme) {
+      this.currentTheme = savedTheme;
+    }
+
     this.applyTheme(this.currentTheme);
     this.loadPosts();
   }
@@ -516,6 +521,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   changeTheme(newTheme: AppTheme): void {
     this.currentTheme = newTheme;
+    localStorage.setItem('theme', newTheme);
     this.applyTheme(newTheme);
   }
 
