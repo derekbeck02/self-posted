@@ -352,6 +352,14 @@ textarea::placeholder {
     border-radius: var(--base-border-radius);
 }
 
+.settings-item input[type="checkbox"] {
+    flex-shrink: 0;
+}
+
+.settings-item select {
+    min-width: 140px;
+}
+
 .setting-info {
     display: flex;
     flex-direction: column;
