@@ -294,18 +294,22 @@
 
             @if (selectedSettingsCategory === generalSettingsCategoryString) {
               <div id="general-settings">
-                <p>General setting 1</p>
-                <p>General setting 2</p>
-                <p>General setting 3</p>
+                <label for="confirm-before-delete-setting-checkbox">Confirm before post deletion: </label>
+                <input
+                  id="confirm-before-delete-setting-checkbox"
+                  type="checkbox"
+                  [checked]="confirmBeforeDelete()"
+                  (change)="toggleConfirmBeforeDelete()"
+                />
               </div>
             }
 
             @if (selectedSettingsCategory === themeSettingsCategoryString) {
               <div id="theme-settings">
-                <label for="theme-selector">Choose a theme: </label>
+                <label for="theme-setting-selector">Choose a theme: </label>
                 <select 
-                  name="theme-selector" 
-                  id="theme-selector"
+                  name="theme-setting-selector" 
+                  id="theme-setting-selector"
                   [value]="currentTheme"
                   (change)="changeTheme($any($event.target).value)"
                 >
@@ -313,8 +317,6 @@
                   <option value="rose">Rose</option>
                   <option value="blue">Blue</option>
                 </select>
-                <p>Theme setting 2</p>
-                <p>Theme setting 3</p>
               </div>
             }
           </div>

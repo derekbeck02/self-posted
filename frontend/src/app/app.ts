@@ -69,6 +69,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       this.currentTheme = savedTheme;
     }
 
+    const savedConfirmBeforeDelete = localStorage.getItem('confirmBeforeDelete');
+    if(savedConfirmBeforeDelete !== null) {
+      this.confirmBeforeDelete.set(savedConfirmBeforeDelete === 'true')
+    }
+
     this.applyTheme(this.currentTheme);
     this.loadPosts();
   }
@@ -506,8 +511,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   }
 
-  toggleSettings() {
+  toggleSettings(): void {
     this.settingsOpen = !this.settingsOpen;
+  }
+
+  toggleConfirmBeforeDelete(): void {
+    this.confirmBeforeDelete.set(!this.confirmBeforeDelete());
+    localStorage.setItem('confirmBeforeDelete', String(this.confirmBeforeDelete()));
   }
 
   changeSettingsCategory(selectedSettingsCategoryId: string): void {
