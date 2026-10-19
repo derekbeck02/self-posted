@@ -136,6 +136,36 @@ input[type="file"]::file-selector-button {
     transition: background-color 0.15s ease;
 }
 
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+
+select {
+    padding: 6px 10px;
+    color: var(--base-text-color);
+    background-color: var(--base-card-color);
+    border: var(--base-border-width) solid var(--base-border-color);
+    border-radius: var(--base-border-radius);
+    cursor: pointer;
+}
+
+select:hover {
+    border-color: var(--primary-color);
+}
+
+select:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .primary-button {
     background-color: var(--default-theme-primary);  
 }
