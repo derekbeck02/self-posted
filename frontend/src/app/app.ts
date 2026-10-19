@@ -46,6 +46,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected newPostContent = signal('');
   protected searchQuery = signal('');
   protected pendingUploads = signal<PendingUpload[]>([]);
+  protected confirmBeforeDelete = signal(true);
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
@@ -219,6 +220,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
 
   deletePost(postId: number) {
+    if (this.confirmBeforeDelete() === true && !confirm('Are you sure you want to delete this post?')) {
+      return;
+    }
+
     this.postService.deletePost(postId).subscribe(() => {
       this.posts.update(posts => 
         posts.filter(post => post.postId !== postId)
