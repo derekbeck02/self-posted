@@ -177,6 +177,8 @@ textarea::placeholder {
     align-items: center;
     max-width: 90%;
     max-height: 90%;
+    min-width: 90%;
+    min-height: 90%;
     padding: var(--base-padding);
     top: 50%;
     right: 50%;
