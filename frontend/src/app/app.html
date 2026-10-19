@@ -278,7 +278,10 @@
                 title="General settings"
                 aria-label="General settings"
                 (click)="changeSettingsCategory(generalSettingsCategoryString)"
-              >General</button>
+              >
+              General
+              </button>
+
               <button
                 id="theme-settings-button"
                 class="settings-category-button"
@@ -289,40 +292,57 @@
                 title="Theme settings"
                 aria-label="Theme settings"
                 (click)="changeSettingsCategory(themeSettingsCategoryString)"
-              >Theme</button>
+              >
+              Theme
+              </button>
             </div>
 
-            @if (selectedSettingsCategory === generalSettingsCategoryString) {
-              <div id="general-settings">
-                <label for="confirm-before-delete-setting-checkbox">Confirm before post deletion: </label>
-                <input
-                  id="confirm-before-delete-setting-checkbox"
-                  type="checkbox"
-                  [checked]="confirmBeforeDelete()"
-                  (change)="toggleConfirmBeforeDelete()"
-                />
-              </div>
-            }
+            <div id="settings-content">
 
-            @if (selectedSettingsCategory === themeSettingsCategoryString) {
-              <div id="theme-settings">
-                <label for="theme-setting-selector">Choose a theme: </label>
-                <select 
-                  name="theme-setting-selector" 
-                  id="theme-setting-selector"
-                  [value]="currentTheme"
-                  (change)="changeTheme($any($event.target).value)"
-                >
-                  <option value="default">Default</option>
-                  <option value="rose">Rose</option>
-                  <option value="blue">Blue</option>
-                </select>
-              </div>
-            }
+              <!-- General settings -->
+              @if (selectedSettingsCategory === generalSettingsCategoryString) {
+                <div class="settings-list">
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Confirm before post deletion</span>
+                      <small>Ask for confirmation before deleting a post.</small>
+                    </div>
+
+                    <input
+                      type="checkbox"
+                      [checked]="confirmBeforeDelete()"
+                      (change)="toggleConfirmBeforeDelete()"
+                    />
+                  </div>
+                </div>
+              }
+
+              <!-- Theme settings -->
+              @if (selectedSettingsCategory === themeSettingsCategoryString) {
+                <div class="settings-list">
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Theme</span>
+                      <small>Choose a theme for Self-Posted.</small>
+                    </div>
+
+                    <select 
+                    name="theme-setting-selector" 
+                    id="theme-setting-selector"
+                    [value]="currentTheme"
+                    (change)="changeTheme($any($event.target).value)"
+                    >
+                      <option value="default">Default</option>
+                      <option value="rose">Rose</option>
+                      <option value="blue">Blue</option>
+                    </select>
+                  </div>
+                </div>
+              }
+            </div>
           </div>
         </div>
       }
     </div>
-    
   </div>
 </div>
