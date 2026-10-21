@@ -93,6 +93,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.applyTheme(this.currentTheme);
+    this.applyRoundedCorners();
     this.loadPosts();
   }
 
