@@ -47,6 +47,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected searchQuery = signal('');
   protected pendingUploads = signal<PendingUpload[]>([]);
   protected confirmBeforeDelete = signal(true);
+  protected showImagePreviews = signal(true);
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
@@ -71,7 +72,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     const savedConfirmBeforeDelete = localStorage.getItem('confirmBeforeDelete');
     if(savedConfirmBeforeDelete !== null) {
-      this.confirmBeforeDelete.set(savedConfirmBeforeDelete === 'true')
+      this.confirmBeforeDelete.set(savedConfirmBeforeDelete === 'true');
+    }
+
+    const savedShowImagePreviews = localStorage.getItem('showImagePreviews');
+    if(savedShowImagePreviews !== null) {
+      this.showImagePreviews.set(savedShowImagePreviews === 'true');
     }
 
     this.applyTheme(this.currentTheme);
@@ -518,6 +524,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   toggleConfirmBeforeDelete(): void {
     this.confirmBeforeDelete.set(!this.confirmBeforeDelete());
     localStorage.setItem('confirmBeforeDelete', String(this.confirmBeforeDelete()));
+  }
+
+  toggleShowImagePreviews(): void {
+    this.showImagePreviews.set(!this.showImagePreviews());
+    localStorage.setItem('showImagePreviews', String(this.showImagePreviews()));
   }
 
   changeSettingsCategory(selectedSettingsCategoryId: string): void {
