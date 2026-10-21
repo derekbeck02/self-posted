@@ -47,6 +47,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected searchQuery = signal('');
   protected pendingUploads = signal<PendingUpload[]>([]);
   protected confirmBeforeDelete = signal(true);
+  protected confirmBeforeAttachmentDelete = signal(true);
   protected showImagePreviews = signal(true);
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
@@ -73,6 +74,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const savedConfirmBeforeDelete = localStorage.getItem('confirmBeforeDelete');
     if(savedConfirmBeforeDelete !== null) {
       this.confirmBeforeDelete.set(savedConfirmBeforeDelete === 'true');
+    }
+
+    const savedConfirmBeforeAttachmentDelete = localStorage.getItem('confirmBeforeAttachmentDelete');
+    if(savedConfirmBeforeAttachmentDelete !== null) {
+      this.confirmBeforeAttachmentDelete.set(savedConfirmBeforeAttachmentDelete === 'true');
     }
 
     const savedShowImagePreviews = localStorage.getItem('showImagePreviews');
@@ -358,21 +364,24 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected deleteAttachment(attachmentId: number): void {
-  this.postService.deleteAttachment(attachmentId).subscribe({
-    next: () => {
-      this.posts.update(posts =>
-        posts.map(post => ({
-          ...post,
-          attachments: post.attachments.filter(
-            attachment => attachment.attachmentId !== attachmentId
-          )
-        }))
-      );
-    },
-    error: (error: HttpErrorResponse) => {
-      console.error('Failed to delete attachment:', error);
+    if (this.confirmBeforeAttachmentDelete() && !confirm('Are you sure you want to delete this attachment?')) {
+      return;
     }
-    });
+    this.postService.deleteAttachment(attachmentId).subscribe({
+      next: () => {
+        this.posts.update(posts =>
+          posts.map(post => ({
+            ...post,
+            attachments: post.attachments.filter(
+              attachment => attachment.attachmentId !== attachmentId
+            )
+          }))
+        );
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Failed to delete attachment:', error);
+      }
+      });
   }
 
   onPostKeydown(event: KeyboardEvent) {
@@ -524,6 +533,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   toggleConfirmBeforeDelete(): void {
     this.confirmBeforeDelete.set(!this.confirmBeforeDelete());
     localStorage.setItem('confirmBeforeDelete', String(this.confirmBeforeDelete()));
+  }
+
+  toggleConfirmBeforeAttachmentDelete(): void {
+    this.confirmBeforeAttachmentDelete.set(!this.confirmBeforeAttachmentDelete());
+    localStorage.setItem('confirmBeforeAttachmentDelete', String(this.confirmBeforeAttachmentDelete()));
   }
 
   toggleShowImagePreviews(): void {
