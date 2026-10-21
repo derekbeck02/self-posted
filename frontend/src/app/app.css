@@ -398,10 +398,6 @@ textarea::placeholder {
     white-space: nowrap;
 }
 
-.attachment-delete-button:hover {
-    color: var(--negative-color);
-}
-
 .attachment-download-button {
     text-decoration: none;
 }
@@ -591,7 +587,8 @@ textarea::placeholder {
 }
 
 .delete-button:hover,
-.close-settings-button:hover {
+.close-settings-button:hover,
+.attachment-delete-button:hover {
     color: var(--negative-color);
 }
 
