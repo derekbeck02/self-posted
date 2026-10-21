@@ -49,6 +49,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected confirmBeforeDelete = signal(true);
   protected confirmBeforeAttachmentDelete = signal(true);
   protected showImagePreviews = signal(true);
+  protected roundedCorners = signal(true);
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
@@ -84,6 +85,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const savedShowImagePreviews = localStorage.getItem('showImagePreviews');
     if(savedShowImagePreviews !== null) {
       this.showImagePreviews.set(savedShowImagePreviews === 'true');
+    }
+
+    const savedRoundedCorners = localStorage.getItem('roundedCorners');
+    if(savedRoundedCorners !== null) {
+      this.roundedCorners.set(savedRoundedCorners === 'true');
     }
 
     this.applyTheme(this.currentTheme);
@@ -545,6 +551,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     localStorage.setItem('showImagePreviews', String(this.showImagePreviews()));
   }
 
+  toggleRoundedCorners(): void {
+    this.roundedCorners.set(!this.roundedCorners());
+    localStorage.setItem('roundedCorners', String(this.roundedCorners()));
+    this.applyRoundedCorners();
+  }
+
   changeSettingsCategory(selectedSettingsCategoryId: string): void {
     if (
       selectedSettingsCategoryId !== this.generalSettingsCategoryString &&
@@ -567,5 +579,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private applyTheme(theme: AppTheme): void {
     document.documentElement.setAttribute('data-theme', theme);
+  }
+
+  private applyRoundedCorners(): void {
+    document.documentElement.setAttribute('data-rounded', String(this.roundedCorners()));
   }
 }

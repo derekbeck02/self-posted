@@ -354,6 +354,7 @@
               <!-- Theme settings -->
               @if (selectedSettingsCategory === themeSettingsCategoryString) {
                 <div class="settings-list">
+                  <!-- Choose theme setting -->
                   <div class="settings-item">
                     <div class="setting-info">
                       <span>Theme</span>
@@ -371,6 +372,21 @@
                       <option value="blue">Blue</option>
                     </select>
                   </div>
+
+                  <!-- Rounded corner setting -->
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Rounded Corners</span>
+                      <small>Use more rounded corners in the interface.</small>
+                    </div>
+
+                    <input
+                      type="checkbox"
+                      [checked]="roundedCorners()"
+                      (change)="toggleRoundedCorners()"
+                    />
+                  </div>
+
                 </div>
               }
             </div>

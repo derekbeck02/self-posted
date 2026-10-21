@@ -85,6 +85,10 @@
     --logo-primary-light: var(--blue-theme-primary-light);
 }
 
+:root[data-rounded="true"] {
+    --base-border-radius: 10px;
+}
+
 *,
 *::before,
 *::after {
