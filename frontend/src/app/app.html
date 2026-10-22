@@ -92,27 +92,29 @@
           </div>
 
           @if (editingPostId() === post.postId) {
-            <textarea
-              class="edit-post-textarea"
-              [value]="editPostContent()"
-              (input)="editPostContent.set($any($event.target).value)"
-            ></textarea>
+            <div class="edit-post-container">
+              <textarea
+                class="edit-post-textarea"
+                [value]="editPostContent()"
+                (input)="editPostContent.set($any($event.target).value); autoResizeTextarea($event)"
+              ></textarea>
 
-            <div class="edit-post-actions">
-              <button
-                type="button"
-                (click)="cancelEditingPost()"
-              >
-                Cancel
-              </button>
+              <div class="edit-post-actions">
+                <button
+                  type="button"
+                  (click)="cancelEditingPost()"
+                >
+                  Cancel
+                </button>
 
-              <button
-                class="primary-button"
-                type="button"
-                (click)="saveEditedPost(post)"
-              >
-                Save
-              </button>
+                <button
+                  class="primary-button"
+                  type="button"
+                  (click)="saveEditedPost(post)"
+                >
+                  Save
+                </button>
+              </div>
             </div>
 
           } @else if (post.content) {

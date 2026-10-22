@@ -150,6 +150,10 @@ textarea::placeholder {
     margin-bottom: var(--base-margin);
 }
 
+#new-post-input-area-container:focus {
+    border: var(--base-border-width) solid var(--base-border-color);
+}
+
 #new-post-composer {
     display: flex;
     align-items: flex-end;
@@ -528,6 +532,34 @@ textarea::placeholder {
 
 .composer-icon-button:hover {
     color: var(--primary-color);
+}
+
+.edit-post-textarea {
+    width: 100%;
+    min-height: 70px;
+    margin: 0;
+    background-color: var(--post-border-color);
+    border-radius: var(--base-border-radius);
+}
+
+.edit-post-textarea:focus {
+    border-color: var(--white);
+    outline: none;
+}
+
+.edit-post-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--base-padding);
+    margin-top: var(--base-padding);
+}
+
+.edit-post-container {
+    margin-top: var(--base-padding);
+    padding: var(--base-padding);
+    background-color: var(--attachment-background-color);
+    border: var(--base-border-width) solid var(--post-border-color);
+    border-radius: var(--base-border-radius);
 }
 
 .empty-posts-message {
