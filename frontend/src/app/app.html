@@ -74,7 +74,7 @@
                 type="button"
                 title="Edit post"
                 aria-label="Edit post"
-                (click)="editPost(post)"
+                (click)="startEditingPost(post)"
               >
                 <tabler-icon [icon]="iconPencil"></tabler-icon>
               </button>
@@ -91,9 +91,33 @@
             </div>
           </div>
 
-          @if (post.content) {
-            <p>{{ post.content }}</p>
-          } 
+          @if (editingPostId() === post.postId) {
+            <textarea
+              class="edit-post-textarea"
+              [value]="editPostContent()"
+              (input)="editPostContent.set($any($event.target).value)"
+            ></textarea>
+
+            <div class="edit-post-actions">
+              <button
+                type="button"
+                (click)="cancelEditingPost()"
+              >
+                Cancel
+              </button>
+
+              <button
+                class="primary-button"
+                type="button"
+                (click)="saveEditedPost(post)"
+              >
+                Save
+              </button>
+            </div>
+
+          } @else if (post.content) {
+              <p>{{ post.content }}</p>
+            } 
 
           @if (post.attachments.length > 0 || getPendingUploadsForPost(post.postId).length > 0) {
             <div class="attachments">

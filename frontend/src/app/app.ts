@@ -50,6 +50,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected confirmBeforeAttachmentDelete = signal(true);
   protected showImagePreviews = signal(true);
   protected roundedCorners = signal(true);
+  protected editingPostId = signal<number | null>(null);
+  protected editPostContent = signal('');
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
@@ -255,22 +257,39 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  editPost(post: Post) {
-    const updatedContent = prompt('Edit your post:', post.content);
+  startEditingPost(post: Post): void {
+    this.editingPostId.set(post.postId);
+    this.editPostContent.set(post.content);
+  }
 
-    if (updatedContent === null) {
-      return;
-    }
+  cancelEditingPost(): void {
+    this.editingPostId.set(null);
+    this.editPostContent.set('');
+  }
 
-    const content = updatedContent.trim();
+  saveEditedPost(post: Post): void {
+    const content = this.editPostContent().trim();
 
     if (!content && post.attachments.length === 0) {
       return;
     }
 
-    this.postService.updatePost(post.postId, content).subscribe(() => {
-      this.loadPosts();
-    });
+    this.postService
+      .updatePost(post.postId, content)
+      .subscribe(() => {
+        this.posts.update(posts =>
+          posts.map(existingPost =>
+            existingPost.postId === post.postId
+              ? {
+                  ...existingPost,
+                  content: content
+                }
+              : existingPost
+          )
+        );
+
+        this.cancelEditingPost();
+      });
   }
 
   onFileSelected(event: Event) {
