@@ -20,14 +20,43 @@
     </button>
   </header>
 
-  <!-- Search Textbox -->
-  <input 
-    id="search-input"
-    type="text"
-    placeholder="Search posts..."
-    [value]="searchQuery()"
-    (input)="searchQuery.set($any($event.target).value)"
-  />
+  <div id="search-controls">
+    <!-- Search Textbox -->
+    <input 
+      id="search-input"
+      type="text"
+      placeholder="Search posts..."
+      [value]="searchQuery()"
+      (input)="searchQuery.set($any($event.target).value)"
+    />
+
+    <div id="filter-control">
+      <button
+        class="icon-button filter-button"
+        [class.active-filter]="postFilters().pinnedOnly"
+        type="button"
+        title="Filter posts"
+        aria-label="Filter posts"
+        (click)="filterMenuOpen.set(!filterMenuOpen())"
+      >
+        <tabler-icon [icon]="iconFilter"></tabler-icon>
+      </button>
+
+      @if (filterMenuOpen()) {
+        <div id="filter-menu">
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              [checked]="postFilters().pinnedOnly"
+              (change)="togglePinnedFilter()"
+            />
+
+            <span>Pinned only</span>
+          </label>
+        </div>
+      }
+    </div>
+  </div>
 
   <!-- Posts Scrollable Window -->
   <div 

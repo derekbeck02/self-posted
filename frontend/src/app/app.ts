@@ -6,8 +6,9 @@ import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
-import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff } from '@tabler/icons-angular';
+import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff, IconFilter2 } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
+import { PostFilters } from './post-filters';
 
 type AppTheme = 'default' | 'rose' | 'blue';
 
@@ -52,6 +53,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected roundedCorners = signal(true);
   protected editingPostId = signal<number | null>(null);
   protected editPostContent = signal('');
+  protected filterMenuOpen = signal(false);
+  protected postFilters = signal<PostFilters>({pinnedOnly: false, categoryId: null});
+
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
@@ -66,6 +70,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconX = IconX;
   protected readonly iconPin = IconPin;
   protected readonly iconPinnedOff = IconPinnedOff;
+  protected readonly iconFilter = IconFilter2;
   protected currentTheme: AppTheme = 'default';
 
   selectedFiles: File[] = [];
@@ -304,6 +309,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   protected filteredPosts = computed(() => {
     const query = this.searchQuery().trim().toLowerCase();
+    const filters = this.postFilters();
 
     let posts = [...this.posts()].sort(
       (a, b) => {
@@ -316,6 +322,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         )
 
     });
+
+    if (filters.pinnedOnly) {
+      posts = posts.filter(post => post.pinned);
+    }
 
     if (query) {
       posts = posts.filter(post =>
@@ -640,5 +650,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         });
       });
     });
+  }
+
+  togglePinnedFilter(): void {
+    this.postFilters.update(filters => ({
+      ...filters,
+      pinnedOnly: !filters.pinnedOnly
+    }));
   }
 }

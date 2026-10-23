@@ -272,6 +272,53 @@ textarea::placeholder {
     max-width: 100%;
 }
 
+#search-controls {
+    display: flex;
+    align-items: flex;
+    gap: var(--base-padding);
+    margin-bottom: var(--base-margin);
+}
+
+#search-controls #search-input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+#filter-control {
+    position: relative;
+}
+
+#filter-button {
+    flex-shrink: 0;
+}
+
+.filter-button {
+    flex-shrink: 0;
+}
+
+.filter-button.active-filter {
+    color: var(--yellow);
+}
+
+#filter-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 180px;
+    padding: var(--base-padding);
+    background-color: var(--base-card-color);
+    border: var(--base-border-width) solid var(--base-border-color);
+    border-radius: var(--base-border-radius);
+    z-index: 5;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: var(--base-padding);
+    cursor: pointer;
+}
+
 #settings-header {
     position:relative;
     display: flex;
