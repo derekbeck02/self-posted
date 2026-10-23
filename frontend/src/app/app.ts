@@ -6,7 +6,7 @@ import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
-import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff, IconFilter2 } from '@tabler/icons-angular';
+import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff, IconFilter } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
 import { PostFilters } from './post-filters';
 
@@ -70,7 +70,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconX = IconX;
   protected readonly iconPin = IconPin;
   protected readonly iconPinnedOff = IconPinnedOff;
-  protected readonly iconFilter = IconFilter2;
+  protected readonly iconFilter = IconFilter;
   protected currentTheme: AppTheme = 'default';
 
   selectedFiles: File[] = [];
