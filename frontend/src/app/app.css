@@ -274,7 +274,7 @@ textarea::placeholder {
 
 #search-controls {
     display: flex;
-    align-items: flex;
+    align-items: center;
     gap: var(--base-padding);
     margin-bottom: var(--base-margin);
 }
