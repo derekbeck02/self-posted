@@ -31,16 +31,25 @@
     />
 
     <div id="filter-control">
-      <button
-        class="icon-button filter-button"
-        [class.active-filter]="postFilters().pinnedOnly"
-        type="button"
-        title="Filter posts"
-        aria-label="Filter posts"
-        (click)="filterMenuOpen.set(!filterMenuOpen())"
-      >
-        <tabler-icon [icon]="iconFilter"></tabler-icon>
-      </button>
+      <div class="filter-button-wrapper">
+        <button
+          class="icon-button filter-button"
+          [class.active-filter]="activeFilterCount() > 0 || filterMenuOpen()"
+          type="button"
+          title="Filter posts"
+          aria-label="Filter posts"
+          (click)="filterMenuOpen.set(!filterMenuOpen())"
+        >
+          <tabler-icon [icon]="iconFilter"></tabler-icon>
+        </button>
+
+        <!-- Active Filter Badge -->
+        @if (activeFilterCount() > 0) {
+          <span class="filter-count">
+            {{ activeFilterCount() }}
+          </span>
+        }
+      </div>
 
       @if (filterMenuOpen()) {
         <div id="filter-menu">

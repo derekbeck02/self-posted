@@ -658,4 +658,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       pinnedOnly: !filters.pinnedOnly
     }));
   }
+
+  protected activeFilterCount = computed(() => {
+    const filters = this.postFilters();
+    let count = 0;
+
+    if (filters.pinnedOnly) {
+      count++;
+    }
+
+    if (filters.categoryId !== null) {
+      count ++;
+    }
+
+    return count;
+  })
 }
