@@ -606,6 +606,28 @@ textarea::placeholder {
     display: block;
 }
 
+.pinned-posts-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--base-padding);
+    color: var(--muted-text-color);
+    font-size: 0.85rem;
+}
+
+.pinned-posts-divider::before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--post-border-color);
+}
+
+.pinned-posts-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--post-border-color);
+}
+
 .post-header {
     display: flex;
     align-items: center;

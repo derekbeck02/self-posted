@@ -45,7 +45,15 @@
         </div>
       }
 
-      @for (post of filteredPosts(); track post.postId) {
+      @for (post of filteredPosts(); track post.postId; let i = $index) {
+
+        <!-- Pinned posts divider -->
+        @if (post.pinned && (i === 0 || !filteredPosts()[i - 1].pinned)) {
+          <div class="pinned-posts-divider">
+            <span>Pinned</span>
+          </div>
+        }
+
         <article [class.pinned]="post.pinned">
           <div class="post-header">
             <small>
