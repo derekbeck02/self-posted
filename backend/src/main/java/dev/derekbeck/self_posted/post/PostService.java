@@ -39,6 +39,14 @@ public class PostService {
         return postRepository.save(existingPost);
     }
 
+    public Post updatePinned(Long id, boolean pinned) {
+        Post existingPost = getPostById(id);
+
+        existingPost.setPinned(pinned);
+
+        return postRepository.save(existingPost);
+    }
+
     @Transactional 
     public void deletePost(Long id) {
         Post existingPost = getPostById(id);

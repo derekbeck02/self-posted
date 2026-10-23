@@ -1,13 +1,12 @@
 package dev.derekbeck.self_posted.post;
 
-import org.hibernate.annotations.SQLRestriction;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.derekbeck.self_posted.attachment.Attachment;
+import org.hibernate.annotations.SQLRestriction;
 
+import dev.derekbeck.self_posted.attachment.Attachment;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +40,8 @@ public class Post {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private boolean pinned;
 
     public Post() {
     }
@@ -83,6 +84,14 @@ public class Post {
 
     public void setAttachments(List<Attachment> attachments) {
         this.attachments = attachments;
+    }
+
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
+    }
+
+    public boolean isPinned() {
+        return pinned;
     }
 
     @PrePersist
