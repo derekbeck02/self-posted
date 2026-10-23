@@ -306,10 +306,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const query = this.searchQuery().trim().toLowerCase();
 
     let posts = [...this.posts()].sort(
-      (a, b) => 
-        new Date(a.createdAt).getTime() - 
-        new Date(b.createdAt).getTime()
-    );
+      (a, b) => {
+        if (a.pinned !== b.pinned) {
+          return a.pinned ? 1 : -1;
+        }
+        return (
+          new Date(a.createdAt).getTime() - 
+          new Date(b.createdAt).getTime()
+        )
+
+    });
 
     if (query) {
       posts = posts.filter(post =>
