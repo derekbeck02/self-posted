@@ -46,7 +46,7 @@
       }
 
       @for (post of filteredPosts(); track post.postId) {
-        <article>
+        <article [class.pinned]="post.pinned">
           <div class="post-header">
             <small>
               {{ formatDate(post.createdAt) }}
