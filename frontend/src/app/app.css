@@ -297,7 +297,7 @@ textarea::placeholder {
 }
 
 .filter-button.active-filter {
-    color: var(--yellow);
+    color: var(--primary-color);
 }
 
 .filter-button-wrapper {
