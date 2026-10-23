@@ -631,6 +631,14 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
             : existingPost
         )
       );
+
+      requestAnimationFrame(() => {
+        document.getElementById(`post-${post.postId}`)
+        ?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      });
     });
   }
 }

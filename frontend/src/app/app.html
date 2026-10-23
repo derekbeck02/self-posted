@@ -54,7 +54,7 @@
           </div>
         }
 
-        <article [class.pinned]="post.pinned">
+        <article [id]="'post-' + post.postId" [class.pinned]="post.pinned">
           <div class="post-header">
             <small>
               {{ formatDate(post.createdAt) }}
