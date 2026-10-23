@@ -48,7 +48,13 @@
       @for (post of filteredPosts(); track post.postId) {
         <article>
           <div class="post-header">
-            <small>{{ formatDate(post.createdAt) }}</small>
+            <small>
+              {{ formatDate(post.createdAt) }}
+              
+              @if (wasEdited(post)) {
+                • Edited
+              }
+            </small>
 
             <div class="post-actions">
               <button

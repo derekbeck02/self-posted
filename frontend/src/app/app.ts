@@ -276,13 +276,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     this.postService
       .updatePost(post.postId, content)
-      .subscribe(() => {
+      .subscribe(updatedPost  => {
         this.posts.update(posts =>
           posts.map(existingPost =>
             existingPost.postId === post.postId
               ? {
-                  ...existingPost,
-                  content: content
+                  ...existingPost, 
+                  ...updatedPost,
                 }
               : existingPost
           )
@@ -603,5 +603,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private applyRoundedCorners(): void {
     document.documentElement.setAttribute('data-rounded', String(this.roundedCorners()));
+  }
+
+  wasEdited(post: Post): boolean {
+    return post.updatedAt !== post.createdAt;
   }
 }
