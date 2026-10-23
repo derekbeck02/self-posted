@@ -25,6 +25,13 @@ export class PostService {
         return this.http.put<Post>(`${this.apiUrl}/${postId}`, { content });
     }
 
+    updatePinned(postId: number, pinned: boolean): Observable<Post> {
+        return this.http.patch<Post>(
+            `/api/posts/${postId}/pin`,
+            { pinned }
+        );
+    }
+
     uploadAttachment(postId: number, file: File): Observable<HttpEvent<Attachment>> {
         const formData = new FormData();
         formData.append('file', file);

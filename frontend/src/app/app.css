@@ -582,6 +582,26 @@ textarea::placeholder {
     align-self:flex-end;
 }
 
+.pin-button.pinned {
+    color: var(--yellow);
+}
+
+.pin-button .pin-icon-off {
+    display: none;
+}
+
+.pin-button.pinned:hover {
+    color: var(--negative-color);
+}
+
+.pin-button.pinned:hover .pin-icon-on {
+    display: none;
+}
+
+.pin-button.pinned:hover .pin-icon-off {
+    display: block;
+}
+
 .post-header {
     display: flex;
     align-items: center;

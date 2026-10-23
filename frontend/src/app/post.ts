@@ -5,5 +5,6 @@ export interface Post {
     content: string;
     createdAt: string;
     updatedAt: string;
+    pinned: boolean;
     attachments: Attachment[];
 }

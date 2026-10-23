@@ -6,7 +6,7 @@ import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
-import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX } from '@tabler/icons-angular';
+import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
 
 type AppTheme = 'default' | 'rose' | 'blue';
@@ -64,6 +64,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconPlus = IconPlus;
   protected readonly iconSettings = IconSettings;
   protected readonly iconX = IconX;
+  protected readonly iconPin = IconPin;
+  protected readonly iconPinnedOff = IconPinnedOff;
   protected currentTheme: AppTheme = 'default';
 
   selectedFiles: File[] = [];
@@ -607,5 +609,22 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   wasEdited(post: Post): boolean {
     return post.updatedAt !== post.createdAt;
+  }
+
+  togglePinned(post: Post): void {
+    const pinned = !post.pinned;
+
+    this.postService.updatePinned(post.postId, pinned).subscribe(updatePost => {
+      this.posts.update(posts =>
+        posts.map(existingPost =>
+          existingPost.postId === post.postId
+            ? {
+              ...existingPost,
+              ...updatePost
+              }
+            : existingPost
+        )
+      );
+    });
   }
 }

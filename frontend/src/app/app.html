@@ -75,6 +75,29 @@
                   (change)="onExistingPostFilesSelected($event, post.postId)"
                 >
 
+              <button
+                class="icon-button pin-button"
+                [class.pinned]="post.pinned"
+                type="button"
+                [title]="post.pinned ? 'Unpin post' : 'Pin post'"
+                [attr.aria-label]="post.pinned ? 'Unpin post' : 'Pin post'"
+                (click)="togglePinned(post)"
+              >
+                @if (post.pinned) {
+                  <tabler-icon
+                    class="pin-icon-on"
+                    [icon]="iconPin"
+                  ></tabler-icon>
+
+                  <tabler-icon
+                    class="pin-icon-off"
+                    [icon]="iconPinnedOff"
+                  ></tabler-icon>
+                } @else {
+                  <tabler-icon [icon]="iconPin"></tabler-icon>
+                }
+              </button>
+
               <button 
                 class="icon-button edit-button"
                 type="button"
