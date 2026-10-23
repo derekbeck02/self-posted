@@ -1,5 +1,6 @@
 package dev.derekbeck.self_posted.post;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class PostService {
         Post existingPost = getPostById(id);
 
         existingPost.setContent(updatedPost.getContent());
+        existingPost.setUpdatedAt(LocalDateTime.now());
 
         return postRepository.save(existingPost);
     }
