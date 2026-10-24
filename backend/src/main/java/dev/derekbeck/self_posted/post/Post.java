@@ -100,6 +100,14 @@ public class Post {
         return pinned;
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
