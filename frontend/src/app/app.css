@@ -594,6 +594,28 @@ textarea::placeholder {
     display: block;
 }
 
+.category-options {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.category-menu-button .category-menu-icon-off {
+  display: none;
+}
+
+.category-menu-button.open:hover {
+  color: var(--negative-color);
+}
+
+.category-menu-button.open:hover .category-menu-icon-on {
+  display: none;
+}
+
+.category-menu-button.open:hover .category-menu-icon-off {
+  display: block;
+}
+
 .composer-icon-button {
     display: flex;
     align-items: center;

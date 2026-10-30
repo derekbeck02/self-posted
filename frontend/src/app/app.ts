@@ -6,7 +6,7 @@ import {  forkJoin, tap } from 'rxjs';
 import { NormalAirplaneIconComponent } from './icons/branding/normal-airplane-icon/normal-airplane-icon';
 import { DamagedAirplaneIconComponent } from './icons/branding/damaged-airplane-icon/damaged-airplane-icon';
 import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
-import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff, IconFilter } from '@tabler/icons-angular';
+import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff, IconFilter, IconTags, IconTagsOff, IconTag } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
 import { PostFilters } from './post-filters';
 import { Category } from './category';
@@ -59,10 +59,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected filterMenuOpen = signal(false);
   protected postFilters = signal<PostFilters>({pinnedOnly: false, categoryId: null});
   protected categories = signal<Category[]>([]);
+  protected categoryMenuPostId = signal<number | null>(null);
 
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
+  protected currentTheme: AppTheme = 'default';
   
   protected readonly iconDownload = IconDownload;
   protected readonly iconPencil = IconPencil;
@@ -75,7 +77,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected readonly iconPin = IconPin;
   protected readonly iconPinnedOff = IconPinnedOff;
   protected readonly iconFilter = IconFilter;
-  protected currentTheme: AppTheme = 'default';
+  protected readonly iconTags = IconTags;
+  protected readonly iconTagsOff = IconTagsOff;
+  protected readonly iconTag = IconTag;
 
   selectedFiles: File[] = [];
 
@@ -680,4 +684,29 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     return count;
   })
+
+  toggleCategoryMenu(postId: number): void {
+    this.categoryMenuPostId.update(current =>
+      current === postId ? null : postId
+    );
+  }
+
+  setPostCategory(post: Post, categoryId: number | null): void {
+  this.postService
+    .updateCategory(post.postId, categoryId)
+    .subscribe(updatedPost => {
+      this.posts.update(posts =>
+        posts.map(existingPost =>
+          existingPost.postId === post.postId
+            ? {
+                ...existingPost,
+                ...updatedPost
+              }
+            : existingPost
+        )
+      );
+
+      this.categoryMenuPostId.set(null);
+    });
+  }
 }

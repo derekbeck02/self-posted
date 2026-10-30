@@ -103,6 +103,50 @@
             </small>
 
             <div class="post-actions">
+              @if (categoryMenuPostId() === post.postId) {
+                <div class="category-options">
+                  <button
+                    class="icon-button category-clear-button"
+                    type="button"
+                    title="Remove category"
+                    aria-label="Remove category"
+                    (click)="setPostCategory(post, null)"
+                  >
+                    <tabler-icon [icon]="iconX"></tabler-icon>
+                  </button>
+                
+
+                  @for (category of categories(); track category.categoryId) {
+                    <button
+                      class="icon-button category-option-button"
+                      type="button"
+                      [title]="category.name"
+                      [attr.aria-label]="'Set category to ' + category.name"
+                      [style.color]="category.color"
+                      (click)="setPostCategory(post, category.categoryId)"
+                    >
+                      <tabler-icon [icon]="iconTag"></tabler-icon>
+                    </button>
+                  }
+                </div>
+              }
+              
+              <button
+                class="icon-button category-menu-button"
+                [class.open]="categoryMenuPostId() === post.postId"
+                type="button"
+                [title]="categoryMenuPostId() === post.postId ? 'Close categories' : 'Choose category'"
+                [attr.aria-label]="categoryMenuPostId() === post.postId ? 'Close categories' : 'Choose category'"
+                (click)="toggleCategoryMenu(post.postId)" 
+              >
+                @if (categoryMenuPostId() === post.postId) {
+                  <tabler-icon class="category-menu-icon-on" [icon]="iconTags"></tabler-icon>
+                  <tabler-icon class="category-menu-icon-off" [icon]="iconTagsOff"></tabler-icon>
+                } @else {
+                  <tabler-icon [icon]="iconTags"></tabler-icon>
+                }
+              </button>
+              
               <button
                   class="icon-button attachment-add-button"
                   type="button"
