@@ -795,4 +795,20 @@ textarea,
         width: 100%;
         min-width: 0;
     }
+
+    .post-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--base-padding);
+    }
+
+    .post-header > small {
+        min-width: max-content;
+    }
+
+    .post-actions {
+        margin-left: auto;
+        flex-wrap: nowrap;
+    }
 }
