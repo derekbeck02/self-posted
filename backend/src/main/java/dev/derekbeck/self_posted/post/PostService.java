@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import dev.derekbeck.self_posted.attachment.AttachmentRepository;
+import dev.derekbeck.self_posted.category.Category;
+import dev.derekbeck.self_posted.category.CategoryService;
 import jakarta.transaction.Transactional;
 
 @Service 
@@ -15,9 +17,16 @@ public class PostService {
 
     private final AttachmentRepository attachmentRepository;
 
-    public PostService(PostRepository postRepository, AttachmentRepository attachmentRepository) {
+    private final CategoryService categoryService;
+
+    public PostService(
+        PostRepository postRepository,
+        AttachmentRepository attachmentRepository,
+        CategoryService categoryService
+    ) {
         this.postRepository = postRepository;
         this.attachmentRepository = attachmentRepository;
+        this.categoryService = categoryService;
     }
 
     public List<Post> getAllPosts() {
@@ -47,6 +56,19 @@ public class PostService {
         existingPost.setPinned(pinned);
 
         return postRepository.save(existingPost);
+    }
+
+    public Post updateCategory(Long postId, Long categoryId) {
+        Post post = getPostById(postId);
+
+        if (categoryId == null) {
+            post.setCategory(null);
+        } else {
+            Category category = categoryService.getCategoryById(categoryId);
+            post.setCategory(category);
+        }
+
+        return postRepository.save(post);
     }
 
     @Transactional 

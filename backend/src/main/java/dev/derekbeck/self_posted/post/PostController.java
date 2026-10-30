@@ -54,4 +54,10 @@ public class PostController {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/category")
+    public Post updateCategory(@PathVariable Long id, 
+        @RequestBody UpdateCategoryRequest request) {
+        return postService.updateCategory(id, request.categoryId());
+    }
 }
