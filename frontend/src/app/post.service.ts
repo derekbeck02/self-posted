@@ -49,4 +49,8 @@ export class PostService {
     deleteAttachment(id: number) {
         return this.http.delete<void>(`/api/attachments/${id}`)
     }
+
+    updateCategory(postId: number, categoryId: number | null): Observable<Post> {
+        return this.http.patch<Post>(`/api/posts/${postId}/category`, { categoryId });
+    }
 }

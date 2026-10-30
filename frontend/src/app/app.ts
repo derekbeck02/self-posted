@@ -9,6 +9,8 @@ import { FileTypeIcon } from './icons/file-type-icon/file-type-icon';
 import { IconTrash, IconPencil, IconDownload, IconArrowNarrowUp, IconPaperclip, IconPlus, TablerIconComponent, IconSettings, IconX, IconPin, IconPinnedOff, IconFilter } from '@tabler/icons-angular';
 import { PendingUpload } from './pending-upload';
 import { PostFilters } from './post-filters';
+import { Category } from './category';
+import { CategoryService } from './category.service';
 
 type AppTheme = 'default' | 'rose' | 'blue';
 
@@ -41,6 +43,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private resizeObserver?: ResizeObserver;
   private stickToBottom = true;
   private settingsOpen = false;
+  private categoryService = inject(CategoryService);
   
   protected uploadError = signal('');
   protected posts = signal<Post[]>([]);
@@ -55,6 +58,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected editPostContent = signal('');
   protected filterMenuOpen = signal(false);
   protected postFilters = signal<PostFilters>({pinnedOnly: false, categoryId: null});
+  protected categories = signal<Category[]>([]);
 
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
@@ -104,6 +108,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.applyTheme(this.currentTheme);
     this.applyRoundedCorners();
     this.loadPosts();
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories.set(categories);
+    });
   }
 
   ngAfterViewInit() {
