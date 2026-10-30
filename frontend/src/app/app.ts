@@ -686,6 +686,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   })
 
   toggleCategoryMenu(postId: number): void {
+    if (this.categories().length === 0) {
+      alert('No categories created. \nAdd categories in Settings → Categories.');
+      return;
+    }
+
     this.categoryMenuPostId.update(current =>
       current === postId ? null : postId
     );
