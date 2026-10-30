@@ -14,6 +14,8 @@ public class Category {
 
     private String name;
 
+    private String color;
+
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
@@ -28,5 +30,13 @@ public class Category {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setColor(String color)  {
+        this.color = color;
+    }
+    
+    public String getColor() {
+        return this.color;
     }
 }
