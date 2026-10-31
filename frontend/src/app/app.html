@@ -102,12 +102,15 @@
               }
             </small>
 
-            <div class="post-actions">
+            <div 
+              class="post-actions"
+              [class.category-menu-open]="categoryMenuPostId() === post.postId"  
+            >
               @if (categoryMenuPostId() === post.postId) {
                 <div class="category-options">
                   <button
                     class="icon-button category-clear-button"
-                    type="button"
+                    type="button"post-actions
                     title="Remove category"
                     aria-label="Remove category"
                     (click)="setPostCategory(post, null)"

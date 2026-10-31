@@ -809,6 +809,33 @@ textarea,
 
     .post-actions {
         margin-left: auto;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: flex-end;
     }
+}
+
+@media (max-width: 400px) {
+  .post-actions.category-menu-open {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .post-actions.category-menu-open .category-options {
+    order: 2;
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+  }
 }
