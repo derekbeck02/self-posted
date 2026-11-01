@@ -760,6 +760,31 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  deleteCategory(categoryId: number): void {
+    if (!confirm('Are you sure you want to delete this category?')) {
+      return;
+    }
+
+    this.categoryService.deleteCategory(categoryId).subscribe(() => {
+      this.categories.update(categories =>
+        categories.filter(
+          category => category.categoryId !== categoryId
+        )
+      );
+
+      this.posts.update(posts =>
+        posts.map(post =>
+          post.category?.categoryId === categoryId
+            ? {
+              ...post,
+              category: null
+            }
+            : post
+        )
+      );
+    });
+  }
+
   getNextCategoryColor(): string {
     const usedColors = new Set(
       this.categories().map(category =>
