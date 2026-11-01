@@ -60,6 +60,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected postFilters = signal<PostFilters>({pinnedOnly: false, categoryId: null});
   protected categories = signal<Category[]>([]);
   protected categoryMenuPostId = signal<number | null>(null);
+  protected addingCategory = signal(false);
+  protected newCategoryName = signal('');
+  protected newCategoryColor = signal('#A970FF');
 
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
@@ -714,6 +717,30 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       );
 
       this.categoryMenuPostId.set(null);
+    });
+  }
+
+  cancelAddCategory(): void {
+    this.addingCategory.set(false);
+    this.newCategoryName.set('');
+    this.newCategoryColor.set('#A970FF');
+  }
+
+  createCategory(): void {
+    const name = this.newCategoryName().trim();
+    const color = this.newCategoryColor().trim();
+
+    if (!name || !color) {
+      return;
+    }
+
+    this.categoryService.createCategory(name, color).subscribe(category => {
+      this.categories.update(categories => [
+        ...categories,
+        category
+      ]);
+
+      this.cancelAddCategory();
     });
   }
 }

@@ -569,9 +569,47 @@
                     </div>
                   }
 
+                  @if (addingCategory()) {
+                    <div class="settings-item category-editor">
+                      <div class="category-editor-fields">
+                        <input
+                          type="text"
+                          placeholder="Category name"
+                          [value]="newCategoryName()"
+                          (input)="newCategoryName.set($any($event.target).value)"
+                        />
+
+                        <input
+                          type="text"
+                          placeholder="#A970FF"
+                          [value]="newCategoryColor()"
+                          (input)="newCategoryColor.set($any($event.target).value)"
+                        />
+
+                        <div class="category-editor-actions">
+                          <button
+                            type="button"
+                            (click)="cancelAddCategory()"
+                          >
+                          Cancel
+                          </button>   
+
+                          <button
+                            type="button"
+                            class="primary-button"
+                            (click)="createCategory()"
+                          >
+                          Save
+                          </button>                          
+                        </div>
+                      </div>
+                    </div>
+                  }
+
                   <button
                     type="button"
                     class="add-category-button"
+                    (click)="addingCategory.set(true)"
                   >
                   <tabler-icon [icon]="iconPlus"></tabler-icon>
                   Add category
