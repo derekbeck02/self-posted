@@ -63,6 +63,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
+  protected categoriesSettingsCategoryString = 'categories';
   protected selectedSettingsCategory = this.generalSettingsCategoryString;
   protected currentTheme: AppTheme = 'default';
   
@@ -609,7 +610,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   changeSettingsCategory(selectedSettingsCategoryId: string): void {
     if (
       selectedSettingsCategoryId !== this.generalSettingsCategoryString &&
-      selectedSettingsCategoryId !== this.themeSettingsCategoryString
+      selectedSettingsCategoryId !== this.themeSettingsCategoryString &&
+      selectedSettingsCategoryId !== this.categoriesSettingsCategoryString
     ) {
       console.warn(
         `Could not find settings category: ${selectedSettingsCategoryId}`

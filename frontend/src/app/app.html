@@ -451,6 +451,20 @@
               </button>
 
               <button
+                id="categories-settings-button"
+                class="settings-category-button"
+                [class.settings-category-button-selected]="
+                  selectedSettingsCategory === categoriesSettingsCategoryString
+                "
+                type="button"
+                title="Categories settings"
+                aria-label="Categories settings"
+                (click)="changeSettingsCategory(categoriesSettingsCategoryString)"
+              >
+              Categories
+              </button>
+
+              <button
                 id="theme-settings-button"
                 class="settings-category-button"
                 [class.settings-category-button-selected]="
@@ -513,6 +527,18 @@
                     />
                   </div>
 
+                </div>
+              }
+
+              <!-- Categories Settings -->
+              @if (selectedSettingsCategory === categoriesSettingsCategoryString) {
+                <div class="settings-list">
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Categories</span>
+                      <small>Create, edit, and delete post categories</small>
+                    </div>
+                  </div>
                 </div>
               }
 
