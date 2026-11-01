@@ -92,7 +92,23 @@
           </div>
         }
 
-        <article [id]="'post-' + post.postId" [class.pinned]="post.pinned">
+        <article 
+          [id]="'post-' + post.postId"
+          [class.pinned]="post.pinned"
+          [style.border-top-color]="post.category?.color || null"
+        >
+
+          @if (post.category) {
+            <div id="post-category-label"
+            >
+                <small class="post-category"
+                  [style.color]="post.category?.color || null"
+                >
+                  {{ post.category.name }}
+                </small>
+            </div>
+          }
+
           <div class="post-header">
             <small>
               {{ formatDate(post.createdAt) }}
@@ -137,6 +153,7 @@
               <button
                 class="icon-button category-menu-button"
                 [class.open]="categoryMenuPostId() === post.postId"
+                [style.color]="post.category?.color || null"
                 type="button"
                 [title]="categoryMenuPostId() === post.postId ? 'Close categories' : 'Choose category'"
                 [attr.aria-label]="categoryMenuPostId() === post.postId ? 'Close categories' : 'Choose category'"

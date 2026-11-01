@@ -66,7 +66,7 @@ article:last-child {
 }
 
 article.pinned {
-  border-left-color: var(--yellow);
+  border-bottom-color: var(--yellow);
 }
 
 progress {
