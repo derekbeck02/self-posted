@@ -63,6 +63,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected addingCategory = signal(false);
   protected newCategoryName = signal('');
   protected newCategoryColor = signal('#A970FF');
+  protected editingCategoryId = signal<number | null>(null);
+  protected editCategoryName = signal('');
+  protected editCategoryColor = signal('');
 
   protected readonly defaultCategoryColors = [
     '#E86C8D', // Red
@@ -740,6 +743,49 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.addingCategory.set(false);
     this.newCategoryName.set('');
     this.newCategoryColor.set('');
+  }
+
+  startEditCategory(category: Category): void {
+    this.editingCategoryId.set(category.categoryId);
+    this.editCategoryName.set(category.name);
+    this.editCategoryColor.set(category.color);
+  }
+
+  cancelEditCategory(): void {
+    this.editingCategoryId.set(null);
+    this.editCategoryName.set('');
+    this.editCategoryColor.set('');
+  }
+
+  saveEditedCategory(categoryId: number): void {
+    const name = this.editCategoryName().trim();
+    const color = this.editCategoryColor().trim();
+    if (!name || !color) {
+      return
+    }
+
+    this.categoryService.updateCategory(categoryId, name, color).subscribe(updatedCategory => {
+      this.categories.update(categories =>
+        categories.map(category =>
+          category.categoryId === categoryId
+            ? updatedCategory
+            : category
+        )
+      );
+
+      this.posts.update(posts =>
+        posts.map(post =>
+          post.category?.categoryId === categoryId
+            ? {
+              ...post,
+              category: updatedCategory
+            }
+            : post
+        )
+      );
+
+      this.cancelEditCategory();
+    });
   }
 
   createCategory(): void {

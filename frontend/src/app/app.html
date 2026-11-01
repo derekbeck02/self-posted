@@ -535,39 +535,75 @@
                 <div class="settings-list">
 
                   @for (category of categories(); track category.categoryId) {
-                    <div class="settings-item">
-                      <div class="category-setting-info">
-                        <span
-                          class="category-color-preview"
-                          [style.background-color]="category.color"
-                        ></span>
-                        <div class="category-setting-text">
-                          <span>{{ category.name }}</span>
-                          <small>{{ category.color }}</small>
+                    @if (editingCategoryId() === category.categoryId) {
+                      <div class="settings-item category-editor">
+                        <div class="category-editor-fields">
+                          <input
+                            type="text"
+                            [value]="editCategoryName()"
+                            (input)="editCategoryName.set($any($event.target).value)"
+                          />
+                        
+                          <input
+                            type="text"
+                            [value]="editCategoryColor()"
+                            (input)="editCategoryColor.set($any($event.target).value)"
+                          />
+                        </div>
+
+                        <div class="category-editor-actions">
+                          <button
+                            type="button"
+                            (click)="cancelEditCategory()"
+                          >
+                          Cancel
+                          </button>
+
+                          <button
+                            type="button"
+                            class="primary-button"
+                            (click)="saveEditedCategory(category.categoryId)"
+                          >
+                          Save
+                          </button>
                         </div>
                       </div>
+                    } @else {
+                      <div class="settings-item">
+                        <div class="category-setting-info">
+                          <span
+                            class="category-color-preview"
+                            [style.background-color]="category.color"
+                          ></span>
+                          <div class="category-setting-text">
+                            <span>{{ category.name }}</span>
+                            <small>{{ category.color }}</small>
+                          </div>
+                        </div>
 
-                      <div class="category-settings-actions">
-                        <button
-                          class="icon-button"
-                          type="button"
-                          title="Edit category"
-                          aria-label="Edit category"
-                        >
-                          <tabler-icon [icon]="iconPencil"></tabler-icon>
-                        </button>
+                        <div class="category-settings-actions">
+                          <button
+                            class="icon-button"
+                            type="button"
+                            title="Edit category"
+                            aria-label="Edit category"
+                            (click)="startEditCategory(category)"
+                          >
+                            <tabler-icon [icon]="iconPencil"></tabler-icon>
+                          </button>
 
-                        <button
-                          class="icon-button delete-button"
-                          type="button"
-                          title="Delete category"
-                          aria-label="Delete category"
-                          (click)="deleteCategory(category.categoryId)"
-                        >
-                          <tabler-icon [icon]="iconTrash"></tabler-icon>
-                        </button>
+                          <button
+                            class="icon-button delete-button"
+                            type="button"
+                            title="Delete category"
+                            aria-label="Delete category"
+                            (click)="deleteCategory(category.categoryId)"
+                          >
+                            <tabler-icon [icon]="iconTrash"></tabler-icon>
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    }
                   }
 
                   @if (addingCategory()) {
@@ -586,23 +622,22 @@
                           [value]="newCategoryColor()"
                           (input)="newCategoryColor.set($any($event.target).value)"
                         />
-
-                        <div class="category-editor-actions">
-                          <button
-                            type="button"
-                            (click)="cancelAddCategory()"
-                          >
+                      </div>
+                      <div class="category-editor-actions">
+                        <button
+                          type="button"
+                          (click)="cancelAddCategory()"
+                        >
                           Cancel
-                          </button>   
+                        </button>
 
-                          <button
-                            type="button"
-                            class="primary-button"
-                            (click)="createCategory()"
-                          >
+                        <button
+                          type="button"
+                          class="primary-button"
+                          (click)="createCategory()"
+                        >
                           Save
-                          </button>                          
-                        </div>
+                        </button>
                       </div>
                     </div>
                   }
