@@ -533,12 +533,49 @@
               <!-- Categories Settings -->
               @if (selectedSettingsCategory === categoriesSettingsCategoryString) {
                 <div class="settings-list">
-                  <div class="settings-item">
-                    <div class="setting-info">
-                      <span>Categories</span>
-                      <small>Create, edit, and delete post categories</small>
+
+                  @for (category of categories(); track category.categoryId) {
+                    <div class="settings-item">
+                      <div class="category-setting-info">
+                        <span
+                          class="category-color-preview"
+                          [style.background-color]="category.color"
+                        ></span>
+                        <div class="category-setting-text">
+                          <span>{{ category.name }}</span>
+                          <small>{{ category.color }}</small>
+                        </div>
+                      </div>
+
+                      <div class="category-settings-actions">
+                        <button
+                          class="icon-button"
+                          type="button"
+                          title="Edit category"
+                          aria-label="Edit category"
+                        >
+                          <tabler-icon [icon]="iconPencil"></tabler-icon>
+                        </button>
+
+                        <button
+                          class="icon-button delete-button"
+                          type="button"
+                          title="Delete category"
+                          aria-label="Delete category"
+                        >
+                          <tabler-icon [icon]="iconTrash"></tabler-icon>
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  }
+
+                  <button
+                    type="button"
+                    class="add-category-button"
+                  >
+                  <tabler-icon [icon]="iconPlus"></tabler-icon>
+                  Add category
+                  </button>
                 </div>
               }
 
