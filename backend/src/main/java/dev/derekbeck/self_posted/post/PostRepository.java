@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostRepository extends JpaRepository<Post, Long> {   
 @Override
-@EntityGraph(attributePaths = "attachments")
+@EntityGraph(attributePaths = {"attachments", "category"})
 List<Post> findAll();
 
 @Override 
-@EntityGraph(attributePaths = "attachments")
+@EntityGraph(attributePaths = {"attachments", "category"})
 Optional<Post> findById(Long id);
 
 }
