@@ -64,6 +64,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected newCategoryName = signal('');
   protected newCategoryColor = signal('#A970FF');
 
+  protected readonly defaultCategoryColors = [
+    '#E86C8D', // Red
+    '#F28C45', // Orange
+    '#F5C542', // Yellow
+    '#4FD17A', // Green
+    '#4FA3FF', // Blue
+    '#55C7C2', // Turquoise
+    '#A970FF', // Purple
+  ]
+
   protected generalSettingsCategoryString = 'general';
   protected themeSettingsCategoryString = 'theme';
   protected categoriesSettingsCategoryString = 'categories';
@@ -720,10 +730,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  startAddCategory(): void {
+    this.newCategoryName.set('');
+    this.newCategoryColor.set(this.getNextCategoryColor());
+    this.addingCategory.set(true);
+  }
+
   cancelAddCategory(): void {
     this.addingCategory.set(false);
     this.newCategoryName.set('');
-    this.newCategoryColor.set('#A970FF');
+    this.newCategoryColor.set('');
   }
 
   createCategory(): void {
@@ -742,5 +758,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
       this.cancelAddCategory();
     });
+  }
+
+  getNextCategoryColor(): string {
+    const usedColors = new Set(
+      this.categories().map(category =>
+        category.color.toUpperCase()
+      )
+    );
+
+    return (
+      this.defaultCategoryColors.find(
+        color => !usedColors.has(color.toUpperCase())
+      )
+      ?? this.defaultCategoryColors[0]
+    );
   }
 }
