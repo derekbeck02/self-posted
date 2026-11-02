@@ -899,7 +899,8 @@ textarea::placeholder {
 .delete-button:hover,
 .category-cancel-button:hover,
 .close-settings-button:hover,
-.attachment-delete-button:hover {
+.attachment-delete-button:hover,
+.cancel-editing-post-button:hover {
     color: var(--negative-color);
 }
 

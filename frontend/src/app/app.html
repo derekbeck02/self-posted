@@ -255,17 +255,22 @@
               <div class="edit-post-actions">
                 <button
                   type="button"
+                  class="icon-button cancel-editing-post-button"
+                  title="Cancel editing post"
+                  aria-label="Cancel editing post"
                   (click)="cancelEditingPost()"
                 >
-                  Cancel
+                  <tabler-icon [icon]="iconX"></tabler-icon>
                 </button>
 
                 <button
-                  class="primary-button"
                   type="button"
+                  class="icon-button save-edited-post-button"
+                  title="Save edited post"
+                  aria-label="Save edited post"
                   (click)="saveEditedPost(post)"
                 >
-                  Save
+                  <tabler-icon [icon]="iconCheck"></tabler-icon>
                 </button>
               </div>
             </div>
