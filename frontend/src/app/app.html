@@ -440,8 +440,8 @@
 
     <div class="settings-window">
       @if (settingsOpen() === true) {
-        <div id="full-div-blur"></div>
-        <div id="settings-menu-box">
+        <div id="full-div-blur" [class.closing]="settingsClosing()"></div>
+        <div id="settings-menu-box" [class.closing]="settingsClosing()">
           <header id="settings-header">
             <h3>Settings</h3>
             <button

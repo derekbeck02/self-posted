@@ -67,6 +67,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected editCategoryColor = signal('');
   protected categoryColorMenuOpen = signal(false);
   protected settingsOpen = signal(false);
+  protected settingsClosing = signal(false);
 
   protected readonly defaultCategoryColors = [
     '#E86C8D', // Red
@@ -609,7 +610,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleSettings(): void {
-    this.settingsOpen.set(!this.settingsOpen())
+    if (!this.settingsOpen()) {
+      this.settingsOpen.set(true);
+      return;
+    }
+
+    this.settingsClosing.set(true);
+    setTimeout(() => {
+      this.settingsOpen.set(false);
+      this.settingsClosing.set(false);
+    }, 160);
   }
 
   toggleConfirmBeforeDelete(): void {
