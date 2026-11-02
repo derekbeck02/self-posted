@@ -68,6 +68,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected categoryColorMenuOpen = signal(false);
   protected settingsOpen = signal(false);
   protected settingsClosing = signal(false);
+  protected filterMenuClosing = signal(false);
 
   protected readonly defaultCategoryColors = [
     '#E86C8D', // Red
@@ -887,5 +888,18 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
           : [...filters.categoryIds, categoryId]
       };
     });
+  }
+
+  toggleFilterMenu(): void {
+    if (!this.filterMenuOpen()) {
+      this.filterMenuOpen.set(true);
+      return;
+    }
+
+    this.filterMenuClosing.set(true);
+    setTimeout(() => {
+      this.filterMenuOpen.set(false);
+      this.filterMenuClosing.set(false);
+    }, 120);
   }
 }

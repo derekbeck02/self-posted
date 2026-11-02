@@ -38,7 +38,7 @@
           type="button"
           title="Filter posts"
           aria-label="Filter posts"
-          (click)="filterMenuOpen.set(!filterMenuOpen())"
+          (click)="toggleFilterMenu()"
         >
           <tabler-icon [icon]="iconFilter"></tabler-icon>
         </button>
@@ -52,7 +52,7 @@
       </div>
 
       @if (filterMenuOpen()) {
-        <div id="filter-menu">
+        <div id="filter-menu" [class.closing]="filterMenuClosing()">
           <label class="filter-option">
             <input
               type="checkbox"
