@@ -57,7 +57,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected editingPostId = signal<number | null>(null);
   protected editPostContent = signal('');
   protected filterMenuOpen = signal(false);
-  protected postFilters = signal<PostFilters>({pinnedOnly: false, categoryId: null});
+  protected postFilters = signal<PostFilters>({pinnedOnly: false, categoryIds: []});
   protected categories = signal<Category[]>([]);
   protected categoryMenuPostId = signal<number | null>(null);
   protected addingCategory = signal(false);
@@ -355,6 +355,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     if (filters.pinnedOnly) {
       posts = posts.filter(post => post.pinned);
+    }
+
+    if (filters.categoryIds.length > 0) {
+      posts = posts.filter(post =>
+        post.category !== null &&
+        filters.categoryIds.includes(post.category.categoryId)
+      );
     }
 
     if (query) {
@@ -698,9 +705,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       count++;
     }
 
-    if (filters.categoryId !== null) {
-      count ++;
-    }
+    count += filters.categoryIds.length;
 
     return count;
   })
@@ -850,5 +855,25 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   toggleCategoryColorMenu(): void {
     this.categoryColorMenuOpen.set(!this.categoryColorMenuOpen());
+  }
+
+  setCategoryFilter(categoryId: number | null): void {
+    this.postFilters.update(filters => ({
+      ...filters,
+      categoryId
+    }));
+  }
+
+  toggleCategoryFilter(categoryId: number): void {
+    this.postFilters.update(filters => {
+      const selected = filters.categoryIds.includes(categoryId);
+
+      return {
+        ...filters,
+        categoryIds: selected
+          ? filters.categoryIds.filter(id => id !== categoryId)
+          : [...filters.categoryIds, categoryId]
+      };
+    });
   }
 }

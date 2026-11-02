@@ -1,4 +1,4 @@
 export interface PostFilters {
     pinnedOnly: boolean;
-    categoryId: number | null;
+    categoryIds: number[];
 }

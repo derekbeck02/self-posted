@@ -60,8 +60,22 @@
               (change)="togglePinnedFilter()"
             />
 
-            <span>Pinned only</span>
+            <span>Pinned</span>
           </label>
+
+          <div class="filter-separator"></div>
+
+          @for (category of categories(); track category.categoryId) {
+            <label class="filter-option">
+              <input
+                type="checkbox"
+                [checked]="postFilters().categoryIds.includes(category.categoryId)"
+                (change)="toggleCategoryFilter(category.categoryId)"
+              />
+              <span>{{ category.name }}</span>
+            </label>
+          }
+
         </div>
       }
     </div>
@@ -538,7 +552,7 @@
                     @if (editingCategoryId() === category.categoryId) {
                       <div class="settings-item category-editor">
                         <div class="category-editor-fields">
-                          <div class="category-editor-buttons">
+                          <div class="category-editor-button">
                             <input
                               class="category-color-input"
                               type="color"
@@ -618,7 +632,7 @@
                   @if (addingCategory()) {
                     <div class="settings-item category-editor">
                       <div class="category-editor-fields">
-                        <div class="category-editor-buttons">
+                        <div class="category-editor-button">
                           <input
                             class="category-color-input"
                             type="color"
@@ -633,7 +647,7 @@
                             [value]="newCategoryName()"
                             (input)="newCategoryName.set($any($event.target).value)"
                           />
-                        </div>
+                        </div>                       z 
                       </div>
                       <div class="category-editor-actions">
                         <button
