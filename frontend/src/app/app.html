@@ -567,6 +567,15 @@
               @if (selectedSettingsCategory === categoriesSettingsCategoryString) {
                 <div class="settings-list">
 
+                  @if (categories().length === 0) {
+                    <div class="settings-item no-categories-message">
+                      <div class="setting-info">
+                        <span>No categories yet</span>
+                        <small>Add one below</small>
+                      </div>
+                    </div>
+                  }
+
                   @for (category of categories(); track category.categoryId) {
                     @if (editingCategoryId() === category.categoryId) {
                       <div class="settings-item category-editor">
