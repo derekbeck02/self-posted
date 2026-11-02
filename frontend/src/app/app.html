@@ -591,8 +591,11 @@
                             <input
                               class="category-name-input"
                               type="text"
+                              placeholder="Category name"
                               [value]="editCategoryName()"
                               (input)="editCategoryName.set($any($event.target).value)"
+                              (keydown.enter)="saveEditedCategory(category.categoryId)"
+                              (keydown.escape)="cancelEditCategory()"
                             />
                           </div>
                         </div>
@@ -674,6 +677,8 @@
                             placeholder="Category name"
                             [value]="newCategoryName()"
                             (input)="newCategoryName.set($any($event.target).value)"
+                            (keydown.enter)="createCategory()"
+                            (keydown.escape)="cancelAddCategory()"
                           />
                         </div>
                       </div>
