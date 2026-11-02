@@ -962,6 +962,28 @@ textarea,
     }
 }
 
+@media (max-width: 500px) {
+    .category-editor-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .category-editor-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .category-editor {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .category-editor-fields {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+}
+
 @media (max-width: 400px) {
   .post-actions.category-menu-open {
     width: 100%;
