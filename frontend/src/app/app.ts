@@ -42,7 +42,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private postService = inject(PostService);
   private resizeObserver?: ResizeObserver;
   private stickToBottom = true;
-  private settingsOpen = false;
   private categoryService = inject(CategoryService);
   
   protected uploadError = signal('');
@@ -67,6 +66,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected editCategoryName = signal('');
   protected editCategoryColor = signal('');
   protected categoryColorMenuOpen = signal(false);
+  protected settingsOpen = signal(false);
 
   protected readonly defaultCategoryColors = [
     '#E86C8D', // Red
@@ -608,7 +608,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleSettings(): void {
-    this.settingsOpen = !this.settingsOpen;
+    this.settingsOpen.set(!this.settingsOpen())
   }
 
   toggleConfirmBeforeDelete(): void {
