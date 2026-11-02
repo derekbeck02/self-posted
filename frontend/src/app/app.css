@@ -623,6 +623,22 @@ textarea::placeholder {
     gap: 4px;
 }
 
+.category-cancel-button {
+    color: var(--muted-text-color);
+}
+
+.category-cancel-button:hover {
+  color: var(--negative-color);
+}
+
+.category-save-button {
+  color: var(--primary-color);
+}
+
+.category-save-button:hover {
+  color: var(--primary-hover-color);
+}
+
 .category-color-input {
     width: 42px;
     height: 30px;

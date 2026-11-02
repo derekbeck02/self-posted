@@ -558,17 +558,22 @@
                         <div class="category-editor-actions">
                           <button
                             type="button"
+                            class="icon-button category-cancel-button"
+                            title="Cancel"
+                            aria-label="Cancel"
                             (click)="cancelEditCategory()"
                           >
-                          Cancel
+                            <tabler-icon [icon]="iconX"></tabler-icon>
                           </button>
 
                           <button
                             type="button"
-                            class="primary-button"
+                            class="icon-button category-save-button"
+                            title="Save"
+                            aria-label="Save"
                             (click)="saveEditedCategory(category.categoryId)"
                           >
-                          Save
+                            <tabler-icon [icon]="iconCheck"></tabler-icon>
                           </button>
                         </div>
                       </div>
@@ -632,19 +637,24 @@
                       </div>
                       <div class="category-editor-actions">
                         <button
-                          type="button"
-                          (click)="cancelAddCategory()"
-                        >
-                          Cancel
-                        </button>
+                            type="button"
+                            class="icon-button category-cancel-button"
+                            title="Cancel"
+                            aria-label="Cancel"
+                            (click)="cancelAddCategory()"
+                          >
+                            <tabler-icon [icon]="iconX"></tabler-icon>
+                          </button>
 
-                        <button
-                          type="button"
-                          class="primary-button"
-                          (click)="createCategory()"
-                        >
-                          Save
-                        </button>
+                          <button
+                            type="button"
+                            class="icon-button category-save-button"
+                            title="Save"
+                            aria-label="Save"
+                            (click)="createCategory()"
+                          >
+                            <tabler-icon [icon]="iconCheck"></tabler-icon>
+                          </button>
                       </div>
                     </div>
                   }
