@@ -538,17 +538,21 @@
                     @if (editingCategoryId() === category.categoryId) {
                       <div class="settings-item category-editor">
                         <div class="category-editor-fields">
-                          <input
-                            type="text"
-                            [value]="editCategoryName()"
-                            (input)="editCategoryName.set($any($event.target).value)"
-                          />
-                        
-                          <input
-                            type="text"
-                            [value]="editCategoryColor()"
-                            (input)="editCategoryColor.set($any($event.target).value)"
-                          />
+                          <div class="category-editor-button">
+                            <input
+                              class="category-color-input"
+                              type="color"
+                              [value]="editCategoryColor()"
+                              (input)="editCategoryColor.set($any($event.target).value)"
+                            />
+
+                            <input
+                              class="category-name-input"
+                              type="text"
+                              [value]="editCategoryName()"
+                              (input)="editCategoryName.set($any($event.target).value)"
+                            />
+                          </div>
                         </div>
 
                         <div class="category-editor-actions">
@@ -609,19 +613,22 @@
                   @if (addingCategory()) {
                     <div class="settings-item category-editor">
                       <div class="category-editor-fields">
-                        <input
-                          type="text"
-                          placeholder="Category name"
-                          [value]="newCategoryName()"
-                          (input)="newCategoryName.set($any($event.target).value)"
-                        />
+                        <div class="category-editor-button">
+                          <input
+                            class="category-color-input"
+                            type="color"
+                            [value]="newCategoryColor()"
+                            (input)="newCategoryColor.set($any($event.target).value)"
+                          />
 
-                        <input
-                          type="text"
-                          placeholder="#A970FF"
-                          [value]="newCategoryColor()"
-                          (input)="newCategoryColor.set($any($event.target).value)"
-                        />
+                          <input
+                            class="category-name-input"
+                            type="text"
+                            placeholder="Category name"
+                            [value]="newCategoryName()"
+                            (input)="newCategoryName.set($any($event.target).value)"
+                          />
+                        </div>                        
                       </div>
                       <div class="category-editor-actions">
                         <button

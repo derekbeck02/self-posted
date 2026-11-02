@@ -22,7 +22,7 @@ type AppTheme = 'default' | 'rose' | 'blue';
     NormalAirplaneIconComponent,
     DamagedAirplaneIconComponent,
     FileTypeIcon,
-    TablerIconComponent,
+    TablerIconComponent
 ],
 })
 
@@ -66,6 +66,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected editingCategoryId = signal<number | null>(null);
   protected editCategoryName = signal('');
   protected editCategoryColor = signal('');
+  protected categoryColorMenuOpen = signal(false);
 
   protected readonly defaultCategoryColors = [
     '#E86C8D', // Red
@@ -844,5 +845,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       )
       ?? this.defaultCategoryColors[0]
     );
+  }
+
+  toggleCategoryColorMenu(): void {
+    this.categoryColorMenuOpen.set(!this.categoryColorMenuOpen());
   }
 }
