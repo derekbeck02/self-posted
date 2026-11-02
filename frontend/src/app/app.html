@@ -496,6 +496,20 @@
               >
               Theme
               </button>
+
+              <button
+                id="about-settings-button"
+                class="settings-category-button"
+                [class.settings-category-button-selected]="
+                  selectedSettingsCategory === aboutSettingsCategoryString
+                "
+                type="button"
+                title="About settings"
+                aria-label="About settings"
+                (click)="changeSettingsCategory(aboutSettingsCategoryString)"
+              >
+              About
+              </button>
             </div>
 
             <div id="settings-content">
@@ -725,6 +739,32 @@
                     />
                   </div>
 
+                </div>
+              }
+
+              <!-- About "settings" -->
+              @if (selectedSettingsCategory === aboutSettingsCategoryString) {
+                <div class="settings-list">
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Self-Posted</span>
+                      <small>Self-hosted personal feed for sending notes and files between devices</small>
+                    </div>
+                  </div>
+
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Version</span>
+                      <small>0.1.0</small>
+                    </div>
+                  </div>
+
+                  <div class="settings-item">
+                    <div class="setting-info">
+                      <span>Stack</span>
+                      <small>Angular · Spring Boot · PostgreSQL</small>
+                    </div>
+                  </div>
                 </div>
               }
             </div>
