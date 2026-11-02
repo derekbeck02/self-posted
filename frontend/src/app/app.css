@@ -688,10 +688,19 @@ textarea::placeholder {
     gap: 4px;
 }
 
-.category-editor-buttons {
+.category-editor-button {
     display: flex;
     align-items: center;
     gap: var(--base-padding);
+    flex: 1;
+    min-width: 0;
+}
+
+.category-editor-fields {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
 }
 
 .category-menu-button .category-menu-icon-off {
