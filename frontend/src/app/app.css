@@ -777,12 +777,16 @@ textarea::placeholder {
     width: 100%;
     min-height: 70px;
     margin: 0;
-    background-color: var(--post-border-color);
+    padding: var(--base-padding);
+    color: var(--base-text-color);
+    background-color: var(--base-card-color);
+    border: var(--base-border-width) solid var(--base-border-color);
     border-radius: var(--base-border-radius);
+    box-sizing: border-box;
 }
 
 .edit-post-textarea:focus {
-    border-color: var(--white);
+    border-color: var(--primary-color);
     outline: none;
 }
 
