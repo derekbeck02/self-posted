@@ -174,12 +174,36 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     ) {
       this.toggleFilterMenu();
     }
+
+    if (
+      this.settingsOpen() &&
+      !target.closest('#settings-menu-box') &&
+      !target.closest('#open-settings-button')
+    ) {
+      this.toggleSettings();
+    }
   }
 
   @HostListener('document:keydown.escape')
   handleEscapeKey(): void {
     if (this.filterMenuOpen()) {
       this.toggleFilterMenu();
+      return;
+    }
+
+    if (this.addingCategory()) {
+      this.cancelAddCategory();
+      return;
+    }
+
+    if (this.editingCategoryId() !== null) {
+      this.cancelEditCategory();
+      return;
+    }
+
+    if (this.settingsOpen()) {
+      this.toggleSettings();
+      return;
     }
   }
 
