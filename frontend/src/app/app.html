@@ -538,7 +538,7 @@
                     @if (editingCategoryId() === category.categoryId) {
                       <div class="settings-item category-editor">
                         <div class="category-editor-fields">
-                          <div class="category-editor-button">
+                          <div class="category-editor-buttons">
                             <input
                               class="category-color-input"
                               type="color"
@@ -618,7 +618,7 @@
                   @if (addingCategory()) {
                     <div class="settings-item category-editor">
                       <div class="category-editor-fields">
-                        <div class="category-editor-button">
+                        <div class="category-editor-buttons">
                           <input
                             class="category-color-input"
                             type="color"
@@ -633,7 +633,7 @@
                             [value]="newCategoryName()"
                             (input)="newCategoryName.set($any($event.target).value)"
                           />
-                        </div>                        
+                        </div>
                       </div>
                       <div class="category-editor-actions">
                         <button

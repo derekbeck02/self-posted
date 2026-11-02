@@ -627,10 +627,6 @@ textarea::placeholder {
     color: var(--muted-text-color);
 }
 
-.category-cancel-button:hover {
-  color: var(--negative-color);
-}
-
 .category-save-button {
   color: var(--primary-color);
 }
@@ -665,7 +661,14 @@ textarea::placeholder {
     border-radius: calc(var(--base-border-radius) / 2);
 }
 
-.category-editor-button {
+.category-editor-actions,
+.category-settings-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.category-editor-buttons {
     display: flex;
     align-items: center;
     gap: var(--base-padding);
@@ -706,12 +709,6 @@ textarea::placeholder {
 .category-name-input:focus {
     outline: none;
     border-color: var(--primary-color);
-}
-
-.category-settings-actions {
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
 .category-setting-text {
@@ -871,6 +868,7 @@ textarea::placeholder {
 }
 
 .delete-button:hover,
+.category-cancel-button:hover,
 .close-settings-button:hover,
 .attachment-delete-button:hover {
     color: var(--negative-color);
