@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild, computed } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, signal, ViewChild, computed, HostListener } from '@angular/core';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http'
 import { PostService } from './post.service';
 import { Post } from './post';
@@ -161,6 +161,26 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         this.scrollToBottom();
       }
     });
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (
+      this.filterMenuOpen() && 
+      !target.closest('#filter-menu') &&
+      !target.closest('.filter-button')
+    ) {
+      this.toggleFilterMenu();
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  handleEscapeKey(): void {
+    if (this.filterMenuOpen()) {
+      this.toggleFilterMenu();
+    }
   }
 
   createPost() {
