@@ -116,8 +116,7 @@
         >
 
           @if (post.category) {
-            <div id="post-category-label"
-            >
+            <div class="post-category-label">
                 <small class="post-category"
                   [style.color]="post.category?.color || null"
                 >
@@ -143,7 +142,7 @@
                 <div class="category-options">
                   <button
                     class="icon-button category-clear-button"
-                    type="button"post-actions
+                    type="button"
                     title="Remove category"
                     aria-label="Remove category"
                     (click)="setPostCategory(post, null)"
@@ -292,7 +291,7 @@
               <!-- Pending upload attachments -->
                 @for (upload of getPendingUploadsForPost(post.postId); track upload.id) {
                 <div
-                  class="attachment-item pending-attachmentStyle="
+                  class="attachment-item pending-attachment"
                 >
                   <div
                     class="attachment-upload-progress"
@@ -307,7 +306,7 @@
                     </span>
 
                     <small>
-                      {{ upload.file.type || 'Unkown type' }}
+                      {{ upload.file.type || 'Unknown type' }}
                       •
                       {{ formatBytes(upload.file.size) }}
                     </small>
@@ -446,9 +445,15 @@
     <div class="settings-window">
       @if (settingsOpen() === true) {
         <div id="full-div-blur" [class.closing]="settingsClosing()"></div>
-        <div id="settings-menu-box" [class.closing]="settingsClosing()">
+        <div 
+          id="settings-menu-box" 
+          role="dialog" 
+          aria-modal="true"
+          aria-labelledby="settings-title"
+          [class.closing]="settingsClosing()"
+        >
           <header id="settings-header">
-            <h3>Settings</h3>
+            <h3 id="settings-title">Settings</h3>
             <button
             class="icon-button close-settings-button"
             type="button"
@@ -677,6 +682,7 @@
                           <input
                             class="category-color-input"
                             type="color"
+                            aria-label="Category color"
                             [value]="newCategoryColor()"
                             (input)="newCategoryColor.set($any($event.target).value)"
                           />
@@ -685,6 +691,7 @@
                             class="category-name-input"
                             type="text"
                             placeholder="Category name"
+                            aria-label="Category name"
                             [value]="newCategoryName()"
                             (input)="newCategoryName.set($any($event.target).value)"
                             (keydown.enter)="createCategory()"
