@@ -519,6 +519,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onEditPostKeydown(event: KeyboardEvent, post: Post): void {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+      event.preventDefault();
+      this.saveEditedPost(post);
+    }
+  }
+
   autoResizeTextarea(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
     const maxHeight = 180;

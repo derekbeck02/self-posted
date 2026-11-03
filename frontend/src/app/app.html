@@ -253,6 +253,7 @@
                 aria-label="Edit post content"
                 [value]="editPostContent()"
                 (input)="editPostContent.set($any($event.target).value); autoResizeTextarea($event)"
+                (keydown)="onEditPostKeydown($event, post)"
               ></textarea>
 
               <div class="edit-post-actions">
